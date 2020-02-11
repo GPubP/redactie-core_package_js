@@ -1,5 +1,3 @@
-const Lib = {
-	prop: 'test',
-};
+export { ModuleAPI, ModuleRouteConfig } from './core/core.types';
+export { wcmCore } from './core/core.class';
 
-export default Lib;
