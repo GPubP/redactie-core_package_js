@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Switch, Route, SwitchProps, RouteComponentProps } from 'react-router-dom';
 import { ModuleRouteConfig } from './routes.types';
 
@@ -11,11 +11,7 @@ export default class WCMRoutes {
 	getAll(): ModuleRouteConfig[] {
 		return this.registeredRoutes;
 	}
-	render(routes: ModuleRouteConfig[]): object {
-		return this.renderRoutes(routes)
-	}
-
-	private renderRoutes(routes: ModuleRouteConfig[] | undefined, extraProps: any = {}, switchProps: SwitchProps = {}): any {
+	render(routes: ModuleRouteConfig[] | undefined, extraProps: any = {}, switchProps: SwitchProps = {}): any {
 		return routes ? (
 			<Switch {...switchProps}>
 				{routes.map((route, index) => (

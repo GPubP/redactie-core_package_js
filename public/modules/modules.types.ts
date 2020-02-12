@@ -1,7 +1,4 @@
-import { FunctionComponent } from 'react';
-
 export interface ModuleAPI {
-	mainRouteComponent?: FunctionComponent;
 	[key: string]: any;
 }
 
