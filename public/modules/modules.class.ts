@@ -5,7 +5,7 @@ export default class WCMModules {
 
 	exposeModuleApi(moduleName: string, api: { [key: string]: any }): void {
 		if (this.registeredModules[moduleName]) {
-			return;
+			throw 'Module already exists';
 		}
 
 		this.registeredModules[moduleName] = api;
