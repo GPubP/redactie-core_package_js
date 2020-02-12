@@ -1,3 +1,3 @@
-export { ModuleAPI, ModuleRouteConfig } from './core/core.types';
-export { wcmCore } from './core/core.class';
-
+export { ModuleAPI } from './modules/modules.types';
+export { ModuleRouteConfig } from './routes/routes.types';
+export { wcmCore } from  './core';
