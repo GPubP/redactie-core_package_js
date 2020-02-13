@@ -2,7 +2,8 @@
   "name": "@redactie/redactie-core",
   "version": "1.0.0",
   "description": "Redactie core package",
-  "main": "index.js",
+  "main": "dist/redactie-core.umd.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "npm run test",
     "build:types": "tsc --emitDeclarationOnly",

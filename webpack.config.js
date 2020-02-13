@@ -27,6 +27,7 @@ module.exports = {
 	externals: {
 		'react': 'react',
 		'react-dom': 'react-dom',
+		'react-router-dom': 'react-router-dom',
 	},
 	output: {
 		filename: 'redactie-core.umd.js',
