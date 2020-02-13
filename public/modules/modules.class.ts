@@ -1,6 +1,6 @@
 import { ModuleAPI } from './modules.types';
 
-export default class WCMModules {
+export default class Modules {
 	private registeredModules: { [key: string]: any } = {};
 
 	exposeModuleApi(moduleName: string, api: { [key: string]: any }): void {

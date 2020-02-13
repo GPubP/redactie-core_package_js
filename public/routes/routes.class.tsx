@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route, SwitchProps, RouteComponentProps } from 'react-router-dom';
 import { ModuleRouteConfig } from './routes.types';
 
-export default class WCMRoutes {
+export default class Routes {
 	private registeredRoutes: ModuleRouteConfig[] = [];
 
 	register(routeConfig: ModuleRouteConfig): void {
