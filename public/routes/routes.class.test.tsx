@@ -1,28 +1,28 @@
 import React from 'react';
-import WCMRoutes from './routes.class';
+import Routes from './routes.class';
 import { ModuleRouteConfig } from './routes.types';
 
-describe('WCMRoutes', () => {
-	let wcmRoutes: WCMRoutes;
+describe('Routes', () => {
+	let routes: Routes;
 	const dummyRouteConfig: ModuleRouteConfig = {
 		path: '/external',
 		component: () => <div>test</div>,
 	}
 
 	beforeEach(() => {
-		wcmRoutes = new WCMRoutes()
+		routes = new Routes()
 	})
 
 	it('Should be able to register a route', () => {
-		expect(wcmRoutes).toBeInstanceOf(WCMRoutes);
-		wcmRoutes.register(dummyRouteConfig);
-		expect(wcmRoutes.getAll()).toEqual([dummyRouteConfig]);
+		expect(routes).toBeInstanceOf(Routes);
+		routes.register(dummyRouteConfig);
+		expect(routes.getAll()).toEqual([dummyRouteConfig]);
 	})
 
 	it('Should be able to render all routes', () => {
-		expect(wcmRoutes).toBeInstanceOf(WCMRoutes);
-		wcmRoutes.register(dummyRouteConfig);
-		const allRoutes = wcmRoutes.getAll();
-		expect(wcmRoutes.render(allRoutes)).toBeInstanceOf(Object)
+		expect(routes).toBeInstanceOf(Routes);
+		routes.register(dummyRouteConfig);
+		const allRoutes = routes.getAll();
+		expect(routes.render(allRoutes)).toBeInstanceOf(Object)
 	})
 })

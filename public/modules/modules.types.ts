@@ -3,6 +3,6 @@ export interface ModuleAPI {
 }
 
 export interface Modules {
-	exposeModuleApi: (moduleName: string, api: {[key: string]: any}) => void;
+	exposeModuleApi: (moduleName: string, api: { [key: string]: any }) => void;
 	getModuleAPI: (moduleName: string) => ModuleAPI;
 }

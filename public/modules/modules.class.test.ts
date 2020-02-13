@@ -1,15 +1,15 @@
-import WCMModules from './modules.class';
+import Modules from './modules.class';
 
-describe('WCMModules', () => {
-	let wcmModules: WCMModules;
+describe('Modules', () => {
+	let modules: Modules;
 
 	beforeEach(() => {
-		wcmModules = new WCMModules()
+		modules = new Modules()
 	})
 
 	it('Should be able to expose a module api', () => {
-		expect(wcmModules).toBeInstanceOf(WCMModules);
-		wcmModules.exposeModuleApi('external-module', {'external-module-api': 'test'})
-		expect(wcmModules.getModuleAPI('external-module')).toEqual({'external-module-api': 'test'})
+		expect(modules).toBeInstanceOf(Modules);
+		modules.exposeModuleApi('external-module', {'external-module-api': 'test'})
+		expect(modules.getModuleAPI('external-module')).toEqual({'external-module-api': 'test'})
 	})
 })

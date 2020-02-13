@@ -8,7 +8,7 @@ export interface ModuleRouteConfig {
 	label?: string;
 	key?: React.Key;
 	path: string;
-	component: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType;
+	component: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | React.ComponentType<{ route: ModuleRouteConfig }>;
 	routes?: ModuleRouteConfig[];
 	[propName: string]: any;
 }
