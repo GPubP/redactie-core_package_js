@@ -14,9 +14,9 @@ module.exports = {
 		'plugin:import/typescript',
 	],
 	env: {
-		"browser": true,
-		"amd": true,
-		"node": true
+		'browser': true,
+		'amd': true,
+		'node': true
 	},
 	rules: {
 		'@typescript-eslint/no-var-requires': 0,
@@ -26,12 +26,14 @@ module.exports = {
 		'import/no-duplicates': 2,
 		'quotes': [2, 'single'],
 		'indent': [2, 'tab'],
-		"comma-dangle": ["error", {
-			"arrays": "always-multiline",
-			"objects": "always-multiline",
-			"imports": "always-multiline",
-			"exports": "always-multiline",
-			"functions": "never"
-		}]
+		'comma-dangle': ['error', {
+			'arrays': 'always-multiline',
+			'objects': 'always-multiline',
+			'imports': 'always-multiline',
+			'exports': 'always-multiline',
+			'functions': 'never'
+		}],
+		'semi': 'off',
+		'@typescript-eslint/semi': ['error', 'always', { 'omitLastInOneLineBlock': true}]
 	}
 };

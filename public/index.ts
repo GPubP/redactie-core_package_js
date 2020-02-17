@@ -1,5 +1,6 @@
-const Lib = {
-	prop: 'test',
-};
+import Core from './core';
 
-export default Lib;
+export { ModuleAPI } from './modules/modules.types';
+export { ModuleRouteConfig } from './routes/routes.types';
+
+export default Core;
