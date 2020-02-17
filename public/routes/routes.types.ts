@@ -8,8 +8,10 @@ export interface ModuleRouteConfig {
 	label?: string;
 	key?: React.Key;
 	path: string;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	component: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | React.ComponentType<{ route: ModuleRouteConfig }>;
 	routes?: ModuleRouteConfig[];
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[propName: string]: any;
 }
 
