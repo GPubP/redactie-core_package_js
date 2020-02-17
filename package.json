@@ -15,6 +15,9 @@
     "type": "git",
     "url": "https://ex02131@bitbucket.antwerpen.be/scm/wcm/redactie-core_package_js.git"
   },
+  "publishConfig": {
+    "@redactie:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
+  },
   "keywords": [
     "Redactie",
     "Core",
