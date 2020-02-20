@@ -4,15 +4,28 @@ export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?
 	route?: ModuleRouteConfig;
 }
 
-export interface ModuleRouteConfig {
+export interface ChildRouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}> extends RouteComponentProps<Params> {
+	route?: ChildModuleRouteConfig;
+}
+
+export interface BaseRouteConfig {
+	key?: string;
 	label?: string;
-	key?: React.Key;
 	path: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	component: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | React.ComponentType<{ route: ModuleRouteConfig }>;
-	routes?: ModuleRouteConfig[];
+	routes?: ChildModuleRouteConfig[];
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	[propName: string]: any;
+}
+
+export interface ModuleRouteConfig extends BaseRouteConfig {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	component: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | React.ComponentType<{ route: ModuleRouteConfig }>;
+	isDefaultRoute?: boolean;
+}
+
+export interface ChildModuleRouteConfig {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	component: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | React.ComponentType<{ route: ChildModuleRouteConfig }>;
 }
 
 export interface Routes {
