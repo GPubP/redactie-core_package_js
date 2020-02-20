@@ -1,31 +1,18 @@
 import React from 'react';
 import { Switch, Route, SwitchProps, RouteComponentProps } from 'react-router-dom';
-import { ModuleRouteConfig, ChildModuleRouteConfig } from './routes.types';
-
-/**
- * set isDefaultRoute to false because subroutes can never be the default route.
- */
-const cleanupSubRoutes = (route: ChildModuleRouteConfig): ChildModuleRouteConfig => {
-	route.isDefaultRoute = false;
-	route.routes && route.routes.map(cleanupSubRoutes);
-	return route;
-};
+import { ModuleRouteConfig } from './routes.types';
 
 export default class Routes {
 	private registeredRoutes: ModuleRouteConfig[] = [];
 
 	register(routeConfig: ModuleRouteConfig): void {
 		const newRoute = routeConfig;
-		if(routeConfig.isDefaultRoute) {
-			this.registeredRoutes.forEach((route: ModuleRouteConfig) => {
-				if(route.isDefaultRoute) {
-					console.warn('Default route already exists.');
-					newRoute.isDefaultRoute = false;
-				}
-			});
-		}
+		const defaultRouteExists = this.registeredRoutes.find((route: ModuleRouteConfig) => route.isDefaultRoute);
 
-		newRoute.routes && newRoute.routes.map(cleanupSubRoutes);
+		if(defaultRouteExists) {
+			console.warn('Default route already exists.');
+			newRoute.isDefaultRoute = false;
+		}
 
 		this.registeredRoutes.push(newRoute);
 	}
