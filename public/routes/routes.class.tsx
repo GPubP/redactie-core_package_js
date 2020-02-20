@@ -16,15 +16,16 @@ export default class Routes {
 
 	register(routeConfig: ModuleRouteConfig): void {
 		const newRoute = routeConfig;
+		if(routeConfig.isDefaultRoute) {
+			this.registeredRoutes.forEach((route: ModuleRouteConfig) => {
+				if(route.isDefaultRoute) {
+					console.warn('Default route already exists.');
+					newRoute.isDefaultRoute = false;
+				}
+			});
+		}
 
-		this.registeredRoutes.forEach((route: ModuleRouteConfig) => {
-			if(routeConfig.isDefaultRoute && route.isDefaultRoute) {
-				console.warn('Default route already exists.');
-				newRoute.isDefaultRoute = false;
-			}
-
-			route.routes && route.routes.map(cleanupSubRoutes);
-		});
+		newRoute.routes && newRoute.routes.map(cleanupSubRoutes);
 
 		this.registeredRoutes.push(newRoute);
 	}
