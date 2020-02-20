@@ -10,7 +10,7 @@ export default class Routes {
 			this.registeredRoutes.forEach((route: ModuleRouteConfig) => {
 				if(route.isDefaultRoute) {
 					this.registeredRoutes.push({...routeConfig, isDefaultRoute: false});
-					throw 'Default route already exists.';
+					console.warn('Default route already exists.');
 				}
 			});
 		}
