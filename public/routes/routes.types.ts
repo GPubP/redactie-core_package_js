@@ -23,7 +23,7 @@ export interface ModuleRouteConfig extends BaseRouteConfig {
 	isDefaultRoute?: boolean;
 }
 
-export interface ChildModuleRouteConfig {
+export interface ChildModuleRouteConfig extends BaseRouteConfig {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	component: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | React.ComponentType<{ route: ChildModuleRouteConfig }>;
 }
