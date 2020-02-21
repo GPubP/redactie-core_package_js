@@ -5,7 +5,7 @@
   "main": "dist/redactie-core.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepublish": "npm run test",
+    "prepublish": "npm run test && npm run build",
     "build:types": "tsc --emitDeclarationOnly",
     "build": "npm run build:types && webpack",
     "lint": "eslint . --ext .ts,.tsx",

@@ -33,4 +33,5 @@ export interface Routes {
 	getAll: () => ModuleRouteConfig[];
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	render: (routeConfig: ModuleRouteConfig[], extraProps?: any, switchProps?: SwitchProps) => object;
+	setPathPrefix: (prefix: string) => void;
 }
