@@ -35,7 +35,8 @@ describe('Routes', () => {
 	});
 
 	it('Should set pathPrefix recursively when available', () => {
-		const routesWithPrefix = new Routes('/prefix');
+		const routesWithPrefix = new Routes();
+		routesWithPrefix.setPathPrefix('/prefix');
 		routesWithPrefix.register(dummyRouteConfig);
 
 		const allRoutes = routesWithPrefix.getAll();

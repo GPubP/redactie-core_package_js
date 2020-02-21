@@ -6,7 +6,7 @@ export default class Routes {
 	private pathPrefix = '';
 	private registeredRoutes: ModuleRouteConfig[] = [];
 
-	constructor(pathPrefix = '') {
+	public setPathPrefix(pathPrefix = ''): void {
 		this.pathPrefix = pathPrefix;
 	}
 
