@@ -6,7 +6,15 @@ export default class Routes {
 	private registeredRoutes: ModuleRouteConfig[] = [];
 
 	register(routeConfig: ModuleRouteConfig): void {
-		this.registeredRoutes.push(routeConfig);
+		const newRoute = routeConfig;
+		const defaultRouteExists = this.registeredRoutes.find((route: ModuleRouteConfig) => route.isDefaultRoute);
+
+		if(defaultRouteExists) {
+			console.warn('Default route already exists.');
+			newRoute.isDefaultRoute = false;
+		}
+
+		this.registeredRoutes.push(newRoute);
 	}
 	getAll(): ModuleRouteConfig[] {
 		return this.registeredRoutes;
