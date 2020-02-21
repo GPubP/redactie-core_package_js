@@ -1,4 +1,4 @@
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, SwitchProps } from 'react-router-dom';
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}> extends RouteComponentProps<Params> {
 	route?: ModuleRouteConfig;
@@ -31,5 +31,6 @@ export interface ChildModuleRouteConfig extends BaseRouteConfig {
 export interface Routes {
 	register: (routeConfig: ModuleRouteConfig) => void;
 	getAll: () => ModuleRouteConfig[];
-	render: (routeConfig: ModuleRouteConfig[]) => object;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	render: (routeConfig: ModuleRouteConfig[], extraProps?: any, switchProps?: SwitchProps) => object;
 }

@@ -1,42 +1,65 @@
-import React from 'react';
-import { Switch, Route, SwitchProps, RouteComponentProps } from 'react-router-dom';
+import React, { ReactElement } from 'react';
+import { Route, RouteComponentProps, Switch, SwitchProps } from 'react-router-dom';
 import { ModuleRouteConfig } from './routes.types';
 
 export default class Routes {
+	private pathPrefix = '';
 	private registeredRoutes: ModuleRouteConfig[] = [];
 
-	register(routeConfig: ModuleRouteConfig): void {
-		const newRoute = routeConfig;
-		const defaultRouteExists = this.registeredRoutes.find((route: ModuleRouteConfig) => route.isDefaultRoute);
+	public setPathPrefix(pathPrefix = ''): void {
+		this.pathPrefix = pathPrefix;
+	}
 
-		if(defaultRouteExists) {
+	public register(routeConfig: ModuleRouteConfig): void {
+		const newRoute = routeConfig;
+		const defaultRouteExists = this.registeredRoutes.find(
+			(route: ModuleRouteConfig) => route.isDefaultRoute
+		);
+
+		if (defaultRouteExists) {
 			console.warn('Default route already exists.');
 			newRoute.isDefaultRoute = false;
 		}
 
-		this.registeredRoutes.push(newRoute);
+		this.registeredRoutes.push(this.prefixRoute(newRoute));
 	}
-	getAll(): ModuleRouteConfig[] {
+
+	public getAll(): ModuleRouteConfig[] {
 		return this.registeredRoutes;
 	}
-	render(routes: ModuleRouteConfig[] | undefined, extraProps: any = {}, switchProps: SwitchProps = {}): any {
+
+	public render(
+		routes: ModuleRouteConfig[] | undefined,
+		extraProps: { [key: string]: any } = {}, // eslint-disable-line @typescript-eslint/no-explicit-any
+		switchProps: SwitchProps = {}
+	): ReactElement | null {
 		return routes ? (
 			<Switch {...switchProps}>
-				{routes.map((route, index) => (
-					<Route
-						key={route.key || index}
-						path={route.path}
-						render={
-							(props: RouteComponentProps): JSX.Element => route.render ? (
-								route.render({ ...props, ...extraProps, route: route })
-							) : (
-								<route.component {...props} {...extraProps} route={route} />
-							)
-						}
-
-					/>
-				))}
+				{routes.map((route, index) => {
+					return (
+						<Route
+							key={route.key || index}
+							path={route.path}
+							render={(props: RouteComponentProps): JSX.Element =>
+								route.render ? (
+									route.render({ ...props, ...extraProps, route: route })
+								) : (
+									<route.component {...props} {...extraProps} route={route} />
+								)
+							}
+						/>
+					);
+				})}
 			</Switch>
 		) : null;
+	}
+
+	private prefixRoute(routeConfig: ModuleRouteConfig): ModuleRouteConfig {
+		// Set path prefix recursively on all routes
+		return {
+			...routeConfig,
+			path: `${this.pathPrefix}${routeConfig.path}`,
+			routes: routeConfig.routes && routeConfig.routes.map((route) => this.prefixRoute(route)),
+		};
 	}
 }
