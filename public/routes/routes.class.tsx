@@ -1,14 +1,14 @@
 import React, { ReactElement } from 'react';
-import { Subject, Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { Route, RouteComponentProps, Switch, SwitchProps } from 'react-router-dom';
 import { ModuleRouteConfig, ChildModuleRouteConfig, RouteOptions } from './routes.types';
 
 export default class Routes {
 	private pathPrefix = '';
 	private registeredRoutes: ModuleRouteConfig[] = [];
-	private registeredRoutesSubject: Subject<ModuleRouteConfig[]> = new Subject();
+	private registeredRoutesSubject: ReplaySubject<ModuleRouteConfig[]> = new ReplaySubject(1);
 
-	public routesChanges: Observable<ModuleRouteConfig[]> = this.registeredRoutesSubject.asObservable();
+	public routesChanges: Observable<ModuleRouteConfig[] | null> = this.registeredRoutesSubject.asObservable();
 
 	public setPathPrefix(pathPrefix = ''): void {
 		this.pathPrefix = pathPrefix;
