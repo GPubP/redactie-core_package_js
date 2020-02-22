@@ -34,7 +34,7 @@ export default class Routes {
 
 	public updateChildRoutes(path: string, routes: ChildModuleRouteConfig[], options: RouteOptions = { prefix: true }): void {
 		this.registeredRoutes = this.registeredRoutes.map((route) => {
-			if (route.path === this.getRoutePath(path)) {
+			if (route.path === this.getRoutePath(path, options.prefix)) {
 				return {
 					...route,
 					routes: options.prefix ? routes.map((r) => this.prefixRoute(r)) : routes,
@@ -45,9 +45,9 @@ export default class Routes {
 		this.registeredRoutesSubject.next(this.registeredRoutes);
 	}
 
-	public update(path: string, routeConfig: ModuleRouteConfig, options: RouteOptions = { prefix: true }): void {
+	public update(routeConfig: ModuleRouteConfig, options: RouteOptions = { prefix: true }): void {
 		this.registeredRoutes = this.registeredRoutes.map((route) => {
-			if (route.path === this.getRoutePath(path)) {
+			if (route.path === this.getRoutePath(routeConfig.path, options.prefix)) {
 				return options.prefix ? this.prefixRoute(routeConfig) : routeConfig;
 			}
 			return route;
@@ -94,7 +94,7 @@ export default class Routes {
 		};
 	}
 
-	private getRoutePath(path: string): string {
-		return `${this.pathPrefix}${path}`;
+	private getRoutePath(path: string, prefix: boolean): string {
+		return prefix ? `${this.pathPrefix}${path}` : path;
 	}
 }
