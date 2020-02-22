@@ -57,5 +57,8 @@
     "webpack-cli": "3.3.10"
   },
   "author": "Glenn Verschooren",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "rxjs": "^6.5.4"
+  }
 }

@@ -1,6 +1,6 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 	mode: 'production',
@@ -22,7 +22,7 @@ module.exports = {
 		// clean dist folder before every build
 		new CleanWebpackPlugin(),
 		// Uncomment this line to analyse your bundle
-		// new BundleAnalyzerPlugin(),
+		new BundleAnalyzerPlugin(),
 	],
 	externals: {
 		'react': 'react',

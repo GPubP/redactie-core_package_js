@@ -35,3 +35,7 @@ export interface Routes {
 	render: (routeConfig: ModuleRouteConfig[], extraProps?: any, switchProps?: SwitchProps) => object;
 	setPathPrefix: (prefix: string) => void;
 }
+
+export interface RouteOptions {
+	prefix: boolean;
+}
