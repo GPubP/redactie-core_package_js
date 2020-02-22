@@ -1,4 +1,5 @@
 import { RouteComponentProps, SwitchProps } from 'react-router-dom';
+import { Observable } from 'rxjs';
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}> extends RouteComponentProps<Params> {
 	route?: ModuleRouteConfig;
@@ -31,6 +32,7 @@ export interface ChildModuleRouteConfig extends BaseRouteConfig {
 export interface Routes {
 	register: (routeConfig: ModuleRouteConfig) => void;
 	getAll: () => ModuleRouteConfig[];
+	routesChanges: Observable<ModuleRouteConfig[] | null>;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	render: (routeConfig: ModuleRouteConfig[], extraProps?: any, switchProps?: SwitchProps) => object;
 	setPathPrefix: (prefix: string) => void;
