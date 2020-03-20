@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Observable, ReplaySubject } from 'rxjs';
-import { Route, RouteComponentProps, Switch, SwitchProps } from 'react-router-dom';
+import { Route, RouteComponentProps, Switch, SwitchProps, Redirect } from 'react-router-dom';
 import { ModuleRouteConfig, ChildModuleRouteConfig, RouteOptions } from './routes.types';
 
 export default class Routes {
@@ -64,24 +64,29 @@ export default class Routes {
 		extraProps: { [key: string]: any } = {}, // eslint-disable-line @typescript-eslint/no-explicit-any
 		switchProps: SwitchProps = {}
 	): ReactElement | null {
+		const redirectRoute = routes?.find(route => route.isDefaultRoute);
+
 		return routes ? (
-			<Switch {...switchProps}>
-				{routes.map((route, index) => {
-					return (
-						<Route
-							key={route.key || index}
-							path={route.path}
-							render={(props: RouteComponentProps): JSX.Element =>
-								route.render ? (
-									route.render({ ...props, ...extraProps, route: route })
-								) : (
-									<route.component {...props} {...extraProps} route={route} />
-								)
-							}
-						/>
-					);
-				})}
-			</Switch>
+			<>
+				{ redirectRoute && <Redirect to={redirectRoute.path} /> }
+				<Switch {...switchProps}>
+					{routes.map((route, index) => {
+						return (
+							<Route
+								key={route.key || index}
+								path={route.path}
+								render={(props: RouteComponentProps): JSX.Element =>
+									route.render ? (
+										route.render({ ...props, ...extraProps, route: route })
+									) : (
+										<route.component {...props} {...extraProps} route={route} />
+									)
+								}
+							/>
+						);
+					})}
+				</Switch>
+			</>
 		) : null;
 	}
 
