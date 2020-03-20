@@ -7,7 +7,7 @@ export default class ActionBar {
 	}
 
 	hide(): void {
-		this.isShown = true;
+		this.isShown = false;
 	}
 
 	setContent(content: React.ReactNode): void {
