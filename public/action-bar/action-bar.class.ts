@@ -1,20 +1,22 @@
+import { ReplaySubject } from 'rxjs';
+
 export default class ActionBar {
-	public isShown = false;
-	public content: React.ReactNode;
+	private isShown: ReplaySubject<boolean> = new ReplaySubject(1);
+	public content: ReplaySubject<React.ReactNode> = new ReplaySubject(1);
 
 	show(): void {
-		this.isShown = true;
+		this.isShown.next(true);
 	}
 
 	hide(): void {
-		this.isShown = false;
+		this.isShown.next(false);
 	}
 
 	setContent(content: React.ReactNode): void {
-		this.content = content;
+		this.content.next(content);
 	}
 
 	clearContent(): void {
-		this.content = null;
+		this.content.next(null);
 	}
 }
