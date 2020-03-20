@@ -12,24 +12,39 @@ describe('ActionBar', () => {
 		expect(actionBar).toBeInstanceOf(ActionBar);
 	});
 
-	it('Should set the content', () => {
+	it('Should set the content', (done) => {
+		actionBar.content.subscribe((content) => {
+			expect(content).toEqual(<p>Hello World</p>);
+			done();
+		});
+
 		actionBar.setContent(<p>Hello World</p>);
-		expect(actionBar.content).toEqual(<p>Hello World</p>);
 	});
 
-	it('Should clear the content', () => {
-		actionBar.setContent(<p>Hello World</p>);
+	it('Should clear the content', (done) => {
+		actionBar.content.subscribe((content) => {
+			expect(content).toEqual(null);
+			done();
+		});
+
 		actionBar.clearContent();
-		expect(actionBar.content).toEqual(null);
 	});
 
-	it('Should show', () => {
+	it('Should show', (done) => {
+		actionBar.isShown.subscribe((content) => {
+			expect(content).toEqual(true);
+			done();
+		});
+
 		actionBar.show();
-		expect(actionBar.isShown).toEqual(true);
 	});
 
-	it('Should hide', () => {
+	it('Should hide', (done) => {
+		actionBar.isShown.subscribe((content) => {
+			expect(content).toEqual(false);
+			done();
+		});
+
 		actionBar.hide();
-		expect(actionBar.isShown).toEqual(false);
 	});
 });
