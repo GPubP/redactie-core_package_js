@@ -1,11 +1,11 @@
 {
   "name": "@redactie/redactie-core",
-  "version": "1.0.3",
+  "version": "1.0.5-alpha.2",
   "description": "Redactie core package",
   "main": "dist/redactie-core.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "prepublish": "npm run test && npm run build",
+    "prepublishOnly": "npm run test && npm run build",
     "build:types": "tsc --emitDeclarationOnly",
     "build": "npm run build:types && webpack",
     "lint": "eslint . --ext .ts,.tsx",
@@ -16,7 +16,7 @@
     "url": "https://ex02131@bitbucket.antwerpen.be/scm/wcm/redactie-core_package_js.git"
   },
   "publishConfig": {
-    "@redactie:registry": "https://nexusrepo.antwerpen.be/repository/npm-private"
+    "@redactie:registry": "https://nexusrepo.antwerpen.be/repository/npm-private/"
   },
   "keywords": [
     "Redactie",
