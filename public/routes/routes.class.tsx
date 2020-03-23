@@ -29,8 +29,8 @@ export default class Routes {
 		};
 
 		this.registeredRoutes = [
-			newRouteConfig,
 			...this.registeredRoutes,
+			newRouteConfig,
 		];
 
 		this.registeredRoutesSubject.next(this.registeredRoutes);
