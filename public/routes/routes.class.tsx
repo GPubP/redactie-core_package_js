@@ -28,7 +28,11 @@ export default class Routes {
 			isDefaultRoute: defaultRouteExists ? false : routeConfig.isDefaultRoute,
 		};
 
-		this.registeredRoutes.push(newRouteConfig);
+		this.registeredRoutes = [
+			...this.registeredRoutes,
+			newRouteConfig,
+		];
+
 		this.registeredRoutesSubject.next(this.registeredRoutes);
 	}
 
