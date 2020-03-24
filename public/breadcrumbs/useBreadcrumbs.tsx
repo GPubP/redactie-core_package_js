@@ -19,8 +19,6 @@ import {
 
 /**
  * This method was "borrowed" from https://stackoverflow.com/a/28339742
- * we used to use the humanize-string package, but it added a lot of bundle
- * size and issues with compilation. This 4-liner seems to cover most cases.
  */
 const humanize = (str: string): string => str
 	.replace(/^[\s_]+|[\s_]+$/g, '')
