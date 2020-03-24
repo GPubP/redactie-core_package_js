@@ -72,8 +72,8 @@ export default class Routes {
 
 		return routes ? (
 			<>
-				{ redirectRoute && <Redirect to={redirectRoute.path} /> }
 				<Switch {...switchProps}>
+					{ redirectRoute && <Redirect exact from={this.pathPrefix} to={redirectRoute.path} /> }
 					{routes.map((route, index) => {
 						return (
 							<Route
