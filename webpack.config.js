@@ -16,7 +16,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: [ '.tsx', '.ts', '.js' ],
+		extensions: ['.tsx', '.ts', '.js'],
 	},
 	plugins: [
 		// clean dist folder before every build
@@ -25,7 +25,7 @@ module.exports = {
 		// new BundleAnalyzerPlugin(),
 	],
 	externals: {
-		'react': 'react',
+		react: 'react',
 		'react-dom': 'react-dom',
 		'react-router-dom': 'react-router-dom',
 		'@acpaas-ui/react-components': '@acpaas-ui/react-components',

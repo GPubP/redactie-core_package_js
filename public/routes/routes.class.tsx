@@ -8,13 +8,18 @@ export default class Routes {
 	private registeredRoutes: ModuleRouteConfig[] = [];
 	private registeredRoutesSubject: ReplaySubject<ModuleRouteConfig[]> = new ReplaySubject(1);
 
-	public routesChanges: Observable<ModuleRouteConfig[] | null> = this.registeredRoutesSubject.asObservable();
+	public routesChanges: Observable<
+		ModuleRouteConfig[] | null
+	> = this.registeredRoutesSubject.asObservable();
 
 	public setPathPrefix(pathPrefix = ''): void {
 		this.pathPrefix = pathPrefix;
 	}
 
-	public register(routeConfig: ModuleRouteConfig, options: RouteOptions = { prefix: true }): void {
+	public register(
+		routeConfig: ModuleRouteConfig,
+		options: RouteOptions = { prefix: true }
+	): void {
 		const defaultRouteExists = this.registeredRoutes.find(
 			(route: ModuleRouteConfig) => route.isDefaultRoute
 		);
@@ -24,19 +29,20 @@ export default class Routes {
 		}
 
 		const newRouteConfig = {
-			...options.prefix ? this.prefixRoute(routeConfig) : routeConfig,
+			...(options.prefix ? this.prefixRoute(routeConfig) : routeConfig),
 			isDefaultRoute: defaultRouteExists ? false : routeConfig.isDefaultRoute,
 		};
 
-		this.registeredRoutes = [
-			...this.registeredRoutes,
-			newRouteConfig,
-		];
+		this.registeredRoutes = [...this.registeredRoutes, newRouteConfig];
 
 		this.registeredRoutesSubject.next(this.registeredRoutes);
 	}
 
-	public updateChildRoutes(path: string, routes: ChildModuleRouteConfig[], options: RouteOptions = { prefix: true }): void {
+	public updateChildRoutes(
+		path: string,
+		routes: ChildModuleRouteConfig[],
+		options: RouteOptions = { prefix: true }
+	): void {
 		this.registeredRoutes = this.registeredRoutes.map((route) => {
 			if (route.path === this.getRoutePath(path, options.prefix)) {
 				return {
@@ -68,12 +74,14 @@ export default class Routes {
 		extraProps: { [key: string]: any } = {}, // eslint-disable-line @typescript-eslint/no-explicit-any
 		switchProps: SwitchProps = {}
 	): ReactElement | null {
-		const redirectRoute = routes?.find(route => route.isDefaultRoute);
+		const redirectRoute = routes?.find((route) => route.isDefaultRoute);
 
 		return routes ? (
 			<>
 				<Switch {...switchProps}>
-					{ redirectRoute && <Redirect exact from={this.pathPrefix} to={redirectRoute.path} /> }
+					{redirectRoute && (
+						<Redirect exact from={this.pathPrefix} to={redirectRoute.path} />
+					)}
 					{routes.map((route, index) => {
 						return (
 							<Route
@@ -99,7 +107,8 @@ export default class Routes {
 		return {
 			...routeConfig,
 			path: `${this.pathPrefix}${routeConfig.path}`,
-			routes: routeConfig.routes && routeConfig.routes.map((route) => this.prefixRoute(route)),
+			routes:
+				routeConfig.routes && routeConfig.routes.map((route) => this.prefixRoute(route)),
 		};
 	}
 

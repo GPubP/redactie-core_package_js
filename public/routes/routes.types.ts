@@ -3,18 +3,20 @@ import { Observable } from 'rxjs';
 
 export type BreadcrumbFunction = (props: BreadcrumbProps) => string;
 
-export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}> extends RouteComponentProps<Params> {
+export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
+	extends RouteComponentProps<Params> {
 	route?: ModuleRouteConfig;
 }
 
-export interface ChildRouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}> extends RouteComponentProps<Params> {
+export interface ChildRouteConfigComponentProps<
+	Params extends { [K in keyof Params]?: string } = {}
+> extends RouteComponentProps<Params> {
 	route?: ChildModuleRouteConfig;
 }
 
 export interface Location {
 	pathname: string;
 }
-
 export interface Match {
 	url: string;
 	path?: string;
@@ -47,22 +49,30 @@ export interface BaseRouteConfig {
 }
 
 export interface ModuleRouteConfig extends BaseRouteConfig {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	component: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | React.ComponentType<{ route: ModuleRouteConfig }>;
+	component:
+		| React.ComponentType<RouteConfigComponentProps<any>> // eslint-disable-line @typescript-eslint/no-explicit-any
+		| React.ComponentType
+		| React.ComponentType<{ route: ModuleRouteConfig }>;
 	isDefaultRoute?: boolean;
 }
 
 export interface ChildModuleRouteConfig extends BaseRouteConfig {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	component: React.ComponentType<RouteConfigComponentProps<any>> | React.ComponentType | React.ComponentType<{ route: ChildModuleRouteConfig }>;
+	component:
+		| React.ComponentType<RouteConfigComponentProps<any>> // eslint-disable-line @typescript-eslint/no-explicit-any
+		| React.ComponentType
+		| React.ComponentType<{ route: ChildModuleRouteConfig }>;
 }
 
 export interface Routes {
 	register: (routeConfig: ModuleRouteConfig) => void;
 	getAll: () => ModuleRouteConfig[];
 	routesChanges: Observable<ModuleRouteConfig[] | null>;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	render: (routeConfig: ModuleRouteConfig[], extraProps?: any, switchProps?: SwitchProps) => object;
+
+	render: (
+		routeConfig: ModuleRouteConfig[],
+		extraProps?: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+		switchProps?: SwitchProps
+	) => object;
 	setPathPrefix: (prefix: string) => void;
 }
 
