@@ -28,6 +28,7 @@ module.exports = {
 		'react': 'react',
 		'react-dom': 'react-dom',
 		'react-router-dom': 'react-router-dom',
+		'@acpaas-ui/react-components': '@acpaas-ui/react-components',
 	},
 	output: {
 		filename: 'redactie-core.umd.js',

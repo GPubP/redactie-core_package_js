@@ -151,11 +151,14 @@ describe('useBreadcrumbs', () => {
 						path: '/one',
 						breadcrumb: null,
 						component: DummyRouteComponent,
+						routes: [
+							{
+								path: '/one/two',
+								component: DummyRouteComponent,
+							},
+						],
 					},
-					{
-						path: '/one/two',
-						component: DummyRouteComponent,
-					},
+
 				];
 				const { breadcrumbItems } = renderRouter('/one/two', routes);
 				if (breadcrumbItems) {

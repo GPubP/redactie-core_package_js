@@ -1,1 +1,1 @@
-declare module '@acpaas-ui/react-components/packages/breadcrumbs';
+declare module '@acpaas-ui/react-components';

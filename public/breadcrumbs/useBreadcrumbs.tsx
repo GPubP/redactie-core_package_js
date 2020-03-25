@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import Breadcrumbs from '@acpaas-ui/react-components/packages/breadcrumbs';
+import { Breadcrumbs } from '@acpaas-ui/react-components';
 import { useLocation, matchPath, Link } from 'react-router-dom';
 
 import { ModuleRouteConfig } from '../routes/routes.types';
@@ -30,25 +30,16 @@ const humanize = (str: string): string => str
  * Takes a route array and recursively flatten it when there are
  * nested routes in the config
  */
-const flattenRoutes = (routes: ModuleRouteConfig[]): ModuleRouteConfig[] => {
+const flattenRoutes = (routes?: ModuleRouteConfig[]): ModuleRouteConfig[] => {
 	if (!Array.isArray(routes)) {
 		return [];
 	}
 
-	return routes.reduce((acc, route): ModuleRouteConfig[]  => {
-		if (route.routes) {
-			return [
-				...acc,
-				route,
-				...flattenRoutes(route.routes),
-			];
-		}
-
-		return [
-			...acc,
-			route,
-		];
-	}, [] as ModuleRouteConfig[]);
+	return routes.reduce((acc, route) => ([
+		...acc,
+		route,
+		...flattenRoutes(route.routes),
+	]), [] as ModuleRouteConfig[]);
 };
 
 /**
@@ -146,9 +137,11 @@ const getBreadcrumbs = ({
 	const { pathname } = location;
 	const matches: Breadcrumb[] = [];
 
-	pathname
-		// Remove query params from pathname
-		.split('?')[0]
+	// Get pathname from url
+	// https://developer.mozilla.org/en-US/docs/Web/API/URL/pathname
+	const url = new URL(`https://mock.be${pathname}`);
+
+	url.pathname
 		// Remove trailing slash "/" from pathname
 		.replace(/\/$/, '')
 		// Split pathname into segments
