@@ -43,6 +43,5 @@ describe('Routes', () => {
 
 		expect(allRoutes[0].path.includes('/prefix')).toBeTruthy();
 		expect(allRoutes[0].routes && allRoutes[0].routes[0].path.includes('/prefix')).toBeTruthy();
-
 	});
 });

@@ -7,19 +7,25 @@ import { ModuleRouteConfig, BreadcrumbProps } from '../routes/routes.types';
 import useBreadcrumbs from './useBreadcrumbs';
 import { BreadcrumbOptions } from './useBreadcrumbs.types';
 
-const BreadcrumbComponent = ({ routes, options }: { routes: ModuleRouteConfig[]; options: BreadcrumbOptions }): React.ReactElement => {
+const BreadcrumbComponent = ({
+	routes,
+	options,
+}: {
+	routes: ModuleRouteConfig[];
+	options: BreadcrumbOptions;
+}): React.ReactElement => {
 	const breadcrumbs = useBreadcrumbs(routes, options);
 
-	return (
-		<>
-			{breadcrumbs}
-		</>
-	);
+	return <>{breadcrumbs}</>;
 };
 const DummyRouteComponent = (): React.ReactElement => <div></div>;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const renderRouter = (pathname: string, routes: ModuleRouteConfig[], options?: BreadcrumbOptions): {
+const renderRouter = (
+	pathname: string,
+	routes: ModuleRouteConfig[],
+	options?: BreadcrumbOptions
+): {
 	breadcrumbItems: NodeListOf<HTMLElement> | null;
 	breadcrumbsWrapper: Element | null;
 	container: HTMLElement;
@@ -27,13 +33,11 @@ const renderRouter = (pathname: string, routes: ModuleRouteConfig[], options?: B
 	const defaultOptions = {
 		...options,
 	};
-	const { container } = render((
-		<Router
-			initialIndex={0}
-			initialEntries={[{ pathname }]}
-		>
+	const { container } = render(
+		<Router initialIndex={0} initialEntries={[{ pathname }]}>
 			<BreadcrumbComponent options={defaultOptions} routes={routes} />
-		</Router>));
+		</Router>
+	);
 
 	const breadcrumbsWrapper = container.querySelector('.m-breadcrumbs');
 	const breadcrumbItems = container.querySelectorAll('li');
@@ -46,7 +50,6 @@ const renderRouter = (pathname: string, routes: ModuleRouteConfig[], options?: B
 };
 
 describe('useBreadcrumbs', () => {
-
 	it('Should return a breadcrumb tree as expected', () => {
 		const routes = [
 			// test home route
@@ -105,10 +108,18 @@ describe('useBreadcrumbs', () => {
 			expect(getNodeText(breadcrumbItems[4] as HTMLElement)).toBe('4');
 
 			// Test href
-			expect((breadcrumbItems[0].querySelector('a') as HTMLElement).getAttribute('href')).toBe('/');
-			expect((breadcrumbItems[1].querySelector('a') as HTMLElement).getAttribute('href')).toBe('/1');
-			expect((breadcrumbItems[2].querySelector('a') as HTMLElement).getAttribute('href')).toBe('/1/2');
-			expect((breadcrumbItems[3].querySelector('a') as HTMLElement).getAttribute('href')).toBe('/1/2/3');
+			expect(
+				(breadcrumbItems[0].querySelector('a') as HTMLElement).getAttribute('href')
+			).toBe('/');
+			expect(
+				(breadcrumbItems[1].querySelector('a') as HTMLElement).getAttribute('href')
+			).toBe('/1');
+			expect(
+				(breadcrumbItems[2].querySelector('a') as HTMLElement).getAttribute('href')
+			).toBe('/1/2');
+			expect(
+				(breadcrumbItems[3].querySelector('a') as HTMLElement).getAttribute('href')
+			).toBe('/1/2/3');
 		}
 	});
 
@@ -133,8 +144,12 @@ describe('useBreadcrumbs', () => {
 			const { breadcrumbItems } = renderRouter('/one/two', routes);
 			if (breadcrumbItems) {
 				// Test breadcrumb name
-				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe('Home');
-				expect(getNodeText(breadcrumbItems[1].querySelector('a') as HTMLElement)).toBe('Override');
+				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
+					'Home'
+				);
+				expect(getNodeText(breadcrumbItems[1].querySelector('a') as HTMLElement)).toBe(
+					'Override'
+				);
 				expect(getNodeText(breadcrumbItems[2] as HTMLElement)).toBe('Two');
 			}
 		});
@@ -158,11 +173,12 @@ describe('useBreadcrumbs', () => {
 							},
 						],
 					},
-
 				];
 				const { breadcrumbItems } = renderRouter('/one/two', routes);
 				if (breadcrumbItems) {
-					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe('Home');
+					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
+						'Home'
+					);
 					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('Two');
 				}
 			});
@@ -204,7 +220,9 @@ describe('useBreadcrumbs', () => {
 				});
 				if (breadcrumbItems) {
 					expect(breadcrumbItems).toHaveLength(2);
-					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe('Home');
+					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
+						'Home'
+					);
 					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('Two');
 				}
 			});
@@ -222,7 +240,9 @@ describe('useBreadcrumbs', () => {
 			const { breadcrumbItems } = renderRouter('/one/', routes);
 			if (breadcrumbItems) {
 				expect(breadcrumbItems).toHaveLength(2);
-				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe('Home');
+				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
+					'Home'
+				);
 				expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('One');
 			}
 		});
@@ -239,7 +259,9 @@ describe('useBreadcrumbs', () => {
 			const { breadcrumbItems } = renderRouter('/one?mock=query', routes);
 			if (breadcrumbItems) {
 				expect(breadcrumbItems).toHaveLength(2);
-				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe('Home');
+				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
+					'Home'
+				);
 				expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('One');
 			}
 		});
