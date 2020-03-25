@@ -122,7 +122,7 @@ const getBreadcrumbMatch = ({
 		return result;
 	}
 
-	// Generate default breadcrumb when the confitionals from above
+	// Generate default breadcrumb when the conditionals from above
 	// don't fire
 	return {
 		match: {
