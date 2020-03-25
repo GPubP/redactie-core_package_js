@@ -45,8 +45,8 @@ import Core from '@redactie/redactie-core'
 
 ```javascript
 // Expose an API to all consumers
-Core.modules.exposeModuleApi('sites-module', {
-	routes: routes,
+Core.modules.exposeModuleApi('name-of-dependency', {
+	doSomething: () => 'Do something',
 });
 
 // Get and use the API from a dependency
