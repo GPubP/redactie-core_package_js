@@ -3,8 +3,7 @@ import { RouteComponentProps, SwitchProps } from 'react-router-dom';
 import { Observable } from 'rxjs';
 
 interface RouteExtraProps {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	[propName: string]: any;
+	[propName: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export type BreadcrumbFunction = (props: BreadcrumbProps) => string;
@@ -27,8 +26,7 @@ export interface Match {
 	url: string;
 	path?: string;
 	params?: {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		[key: string]: any;
+		[key: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 	};
 	isExact?: boolean;
 }
@@ -50,19 +48,16 @@ export interface BaseRouteConfig {
 		exact?: boolean;
 		strict?: boolean;
 	};
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	[propName: string]: any;
+	[propName: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export interface ModuleRouteConfig extends BaseRouteConfig {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	component: ComponentType<any>;
+	component: ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 	isDefaultRoute?: boolean;
 }
 
 export interface ChildModuleRouteConfig extends BaseRouteConfig {
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	component: ComponentType<any>;
+	component: ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export interface Routes {
