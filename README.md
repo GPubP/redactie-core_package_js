@@ -67,14 +67,21 @@ application. It will also add a navigation item to the main navigation when a `l
 
 ```javascript
 Core.routes.register({
-	path: '/dashboard',
+	path: '/users',
 	component: Dashboard,
-	label: 'Dashboard',
+	label: 'Users',
+	routes: [
+		{
+			path: '/users/:userId',
+			component: UserComponent,
+		},
+	],
 });
 
-const SitesComponent: FC<{ route: ModuleRouteConfig }> = ({ route }) => {
+const UsersComponent: FC<{ route: ModuleRouteConfig }> = ({ route }) => {
 	return (
 		<>
+			// Render child routes => /users/:userId
 			{Core.routes.render(route.routes)}
 		</>
 	);
@@ -85,17 +92,17 @@ const SitesComponent: FC<{ route: ModuleRouteConfig }> = ({ route }) => {
 #### Update route
 ```javascript
 Core.routes.update({
-	path: '/sites/one',
-	component: SitesOne,
+	path: '/users',
+	component: UsersComponent,
 });
 ```
 
 #### Update child routes
 
 ```javascript
-Core.routes.updateChildRoutes('/sites', [{
-	path: '/sites/one',
-	component: SitesOne,
+Core.routes.updateChildRoutes('/users', [{
+	path: '/users/:userId',
+	component: UserComponent,
 }]);
 ```
 
