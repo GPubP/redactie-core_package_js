@@ -21,10 +21,11 @@ import {
 /**
  * This method was "borrowed" from https://stackoverflow.com/a/28339742
  */
-const humanize = (str: string): string => str
-	.replace(/^[\s_]+|[\s_]+$/g, '')
-	.replace(/[_\s]+/g, ' ')
-	.replace(/^[a-z]/, (m) => m.toUpperCase());
+const humanize = (str: string): string =>
+	str
+		.replace(/^[\s_]+|[\s_]+$/g, '')
+		.replace(/[_\s]+/g, ' ')
+		.replace(/^[a-z]/, (m) => m.toUpperCase());
 
 /**
  * Takes a route array and recursively flatten it when there are
@@ -35,11 +36,10 @@ const flattenRoutes = (routes?: ModuleRouteConfig[]): ModuleRouteConfig[] => {
 		return [];
 	}
 
-	return routes.reduce((acc, route) => ([
-		...acc,
-		route,
-		...flattenRoutes(route.routes),
-	]), [] as ModuleRouteConfig[]);
+	return routes.reduce(
+		(acc, route) => [...acc, route, ...flattenRoutes(route.routes)],
+		[] as ModuleRouteConfig[]
+	);
 };
 
 /**
@@ -60,11 +60,13 @@ const getBreadcrumbMatch = ({
 	// Check the optional `excludePaths` option in `options` to see if the
 	// current path should not include a breadcrumb
 	if (Array.isArray(excludePaths)) {
-		const isPathExcluded = excludePaths.find(path => matchPath(pathSection, {
-			path,
-			exact: true,
-			strict: false,
-		}));
+		const isPathExcluded = excludePaths.find((path) =>
+			matchPath(pathSection, {
+				path,
+				exact: true,
+				strict: false,
+			})
+		);
 
 		if (isPathExcluded) {
 			return NO_BREADCRUMB;
@@ -97,12 +99,15 @@ const getBreadcrumbMatch = ({
 				match,
 				location,
 				target: match.url,
-				name: typeof parsedBreadcrumb === 'function' ? parsedBreadcrumb({
-					match,
-					location,
-					key: match.url,
-					currentSection,
-				}) : parsedBreadcrumb,
+				name:
+					typeof parsedBreadcrumb === 'function'
+						? parsedBreadcrumb({
+								match,
+								location,
+								key: match.url,
+								currentSection,
+						  })
+						: parsedBreadcrumb,
 			};
 			return true;
 		}
@@ -129,11 +134,7 @@ const getBreadcrumbMatch = ({
 /**
  * Generate a breadcrumb tree based on the given routes, location and options
  */
-const getBreadcrumbs = ({
-	routes,
-	location,
-	options = {},
-}: GetBreadcrumbsProps): Breadcrumb[] => {
+const getBreadcrumbs = ({ routes, location, options = {} }: GetBreadcrumbsProps): Breadcrumb[] => {
 	const { pathname } = location;
 	const matches: Breadcrumb[] = [];
 
@@ -168,7 +169,6 @@ const getBreadcrumbs = ({
 			}
 
 			return pathSection === '/' ? '' : pathSection;
-
 		}, '');
 
 	return matches;
@@ -177,18 +177,22 @@ const getBreadcrumbs = ({
 /**
  * The useBreadcrumbs hook will return a breadcrumb component based on the given routes and options
  */
-const useBreadcrumbs = (routes: ModuleRouteConfig[], options?: BreadcrumbOptions): React.ReactNode => {
+const useBreadcrumbs = (
+	routes: ModuleRouteConfig[],
+	options?: BreadcrumbOptions
+): React.ReactNode => {
 	const location = useLocation();
-	const breadcrumbs = useMemo(() => getBreadcrumbs({
-		routes: flattenRoutes(routes),
-		location,
-		options,
-	}), [routes]);
+	const breadcrumbs = useMemo(
+		() =>
+			getBreadcrumbs({
+				routes: flattenRoutes(routes),
+				location,
+				options,
+			}),
+		[routes]
+	);
 
-	const CustomLink = ({
-		href,
-		name,
-	}: CustomLinkProps): React.ReactElement => {
+	const CustomLink = ({ href, name }: CustomLinkProps): React.ReactElement => {
 		return <Link to={href}>{name}</Link>;
 	};
 
@@ -205,7 +209,6 @@ const useBreadcrumbs = (routes: ModuleRouteConfig[], options?: BreadcrumbOptions
 			items={breadcrumbs}
 		/>
 	);
-
 };
 
 export default useBreadcrumbs;

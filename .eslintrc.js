@@ -5,6 +5,8 @@ module.exports = {
 		'@typescript-eslint',
 		'import',
 		'react',
+		'react-hooks',
+		'prettier',
 	],
 	extends: [
 		'eslint:recommended',
@@ -14,6 +16,9 @@ module.exports = {
 		'plugin:import/errors',
 		'plugin:import/warnings',
 		'plugin:import/typescript',
+		'plugin:prettier/recommended',
+		'prettier/@typescript-eslint',
+		'prettier/react',
 	],
 	env: {
 		'browser': true,
@@ -27,7 +32,6 @@ module.exports = {
 		'import/exports-last': 2,
 		'import/no-duplicates': 2,
 		'quotes': [2, 'single'],
-		'indent': [2, 'tab'],
 		'comma-dangle': ['error', {
 			'arrays': 'always-multiline',
 			'objects': 'always-multiline',

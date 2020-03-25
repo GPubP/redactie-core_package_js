@@ -9,18 +9,20 @@ interface RouteExtraProps {
 
 export type BreadcrumbFunction = (props: BreadcrumbProps) => string;
 
-export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}> extends RouteComponentProps<Params> {
+export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
+	extends RouteComponentProps<Params> {
 	route: ModuleRouteConfig;
 }
 
-export interface ChildRouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}> extends RouteComponentProps<Params> {
+export interface ChildRouteConfigComponentProps<
+	Params extends { [K in keyof Params]?: string } = {}
+> extends RouteComponentProps<Params> {
 	route: ChildModuleRouteConfig;
 }
 
 export interface Location {
 	pathname: string;
 }
-
 export interface Match {
 	url: string;
 	path?: string;
@@ -67,7 +69,11 @@ export interface Routes {
 	register: (routeConfig: ModuleRouteConfig) => void;
 	getAll: () => ModuleRouteConfig[];
 	routesChanges: Observable<ModuleRouteConfig[] | null>;
-	render: (routeConfig: ModuleRouteConfig[], extraProps?: RouteExtraProps, switchProps?: SwitchProps) => object;
+	render: (
+		routeConfig: ModuleRouteConfig[],
+		extraProps?: RouteExtraProps,
+		switchProps?: SwitchProps
+	) => object;
 	setPathPrefix: (prefix: string) => void;
 }
 

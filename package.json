@@ -1,6 +1,6 @@
 {
   "name": "@redactie/redactie-core",
-  "version": "1.0.5-alpha.5",
+  "version": "1.1.0",
   "description": "Redactie core package",
   "main": "dist/redactie-core.umd.js",
   "types": "dist/index.d.ts",
@@ -24,6 +24,7 @@
     "Package"
   ],
   "devDependencies": {
+    "@acpaas-ui/react-components": "^4.0.0",
     "@babel/core": "7.8.3",
     "@babel/preset-env": "7.8.3",
     "@babel/preset-react": "7.8.3",
@@ -40,14 +41,17 @@
     "babel-jest": "25.1.0",
     "clean-webpack-plugin": "3.0.0",
     "eslint": "6.8.0",
+    "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "2.20.0",
     "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "husky": "4.2.1",
     "install": "0.13.0",
     "jest": "25.1.0",
     "lint-staged": "10.0.7",
     "npm": "6.13.7",
+    "prettier": "^2.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
@@ -55,8 +59,7 @@
     "typescript": "3.7.5",
     "webpack": "4.41.5",
     "webpack-bundle-analyzer": "3.6.0",
-    "webpack-cli": "3.3.10",
-    "@acpaas-ui/react-components": "^4.0.0"
+    "webpack-cli": "3.3.10"
   },
   "peerDependencies": {
     "@acpaas-ui/react-components": "^4.0.0",
