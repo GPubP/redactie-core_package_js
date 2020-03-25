@@ -24,3 +24,8 @@ export interface GetBreadcrumbMatchProps {
 	routes: ModuleRouteConfig[];
 	excludePaths?: string[];
 }
+
+export interface CustomLinkProps {
+	href: string;
+	name: string;
+}

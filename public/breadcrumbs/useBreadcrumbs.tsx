@@ -9,6 +9,7 @@ import {
 	BreadcrumbOptions,
 	GetBreadcrumbsProps,
 	GetBreadcrumbMatchProps,
+	CustomLinkProps,
 } from './useBreadcrumbs.types';
 import {
 	DEFAULT_MATCH_OPTIONS,
@@ -194,10 +195,7 @@ const useBreadcrumbs = (routes: ModuleRouteConfig[], options?: BreadcrumbOptions
 	const CustomLink = ({
 		href,
 		name,
-	}: {
-		href: string;
-		name: string;
-	}): React.ReactElement => {
+	}: CustomLinkProps): React.ReactElement => {
 		return <Link to={href}>{name}</Link>;
 	};
 
