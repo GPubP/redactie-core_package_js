@@ -7,6 +7,8 @@ interface RouteExtraProps {
 	[propName: string]: any;
 }
 
+export type BreadcrumbFunction = (props: BreadcrumbProps) => string;
+
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}> extends RouteComponentProps<Params> {
 	route: ModuleRouteConfig;
 }
@@ -15,11 +17,39 @@ export interface ChildRouteConfigComponentProps<Params extends { [K in keyof Par
 	route: ChildModuleRouteConfig;
 }
 
-export interface BaseRouteConfig extends RouteExtraProps {
+export interface Location {
+	pathname: string;
+}
+
+export interface Match {
+	url: string;
+	path?: string;
+	params?: {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		[key: string]: any;
+	};
+	isExact?: boolean;
+}
+
+export interface BreadcrumbProps {
+	match: Match;
+	location: Location;
+	key: string;
+	currentSection: string;
+}
+
+export interface BaseRouteConfig {
 	key?: string;
 	label?: string;
 	path: string;
 	routes?: ChildModuleRouteConfig[];
+	breadcrumb?: BreadcrumbFunction | string | null;
+	matchOptions?: {
+		exact?: boolean;
+		strict?: boolean;
+	};
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	[propName: string]: any;
 }
 
 export interface ModuleRouteConfig extends BaseRouteConfig {

@@ -6,5 +6,6 @@ export {
 	ModuleRouteConfig,
 	RouteConfigComponentProps,
 } from './routes/routes.types';
+export { default as useBreadcrumbs } from './breadcrumbs/useBreadcrumbs';
 
 export default Core;
