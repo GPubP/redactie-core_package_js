@@ -127,30 +127,6 @@ Core.routes.routesChanges.subscribe(routes => ...);
 | matchOptions  | Object         | no            | { exact: true, strict: false }| Route matchOptions      |
 
 
-### Action bar
-> Use the Action bar API to show actions in the main application
-
-#### Show Action bar
-```javascript
-Core.actionBar.show();
-```
-
-#### Hide Action bar
-```javascript
-Core.actionBar.hide();
-```
-
-#### Set content to the action bar
-```javascript
-const ActionBarComponent = () => <div>Actions</div>
-Core.actionBar.setContent(ActionBarComponent);
-```
-
-#### Clear all content
-```javascript
-Core.actionBar.clearContent();
-```
-
 ### Breadcrumbs
 > Use Breadcrumbs API to generate a nice Breadcrumb component
 
