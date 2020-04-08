@@ -109,6 +109,14 @@ export default class Routes {
 			path: `${this.pathPrefix}${routeConfig.path}`,
 			routes:
 				routeConfig.routes && routeConfig.routes.map((route) => this.prefixRoute(route)),
+			navigation: routeConfig.navigation
+				? {
+						...routeConfig.navigation,
+						parentPath: routeConfig.navigation.parentPath
+							? `${this.pathPrefix}${routeConfig.navigation.parentPath}`
+							: undefined,
+				  }
+				: undefined,
 		};
 	}
 

@@ -44,6 +44,13 @@ export interface BaseRouteConfig {
 	path: string;
 	routes?: ChildModuleRouteConfig[];
 	breadcrumb?: BreadcrumbFunction | string | null;
+	navigation?: {
+		context?: string;
+		renderContext?: string;
+		label: string;
+		order?: number;
+		parentPath?: string;
+	};
 	matchOptions?: {
 		exact?: boolean;
 		strict?: boolean;
