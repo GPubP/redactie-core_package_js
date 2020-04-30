@@ -1,14 +1,15 @@
 import { Match, ModuleRouteConfig, Location } from '../routes/routes.types';
 
 export interface Breadcrumb {
-	match: Match;
-	location: Location;
+	match?: Match;
+	location?: Location;
 	name: string;
 	target: string;
 }
 
 export interface BreadcrumbOptions {
 	excludePaths?: string[];
+	extraBreadcrumbs?: Breadcrumb[];
 }
 
 export interface GetBreadcrumbsProps {

@@ -1,5 +1,5 @@
-import Modules from '../modules/modules.class';
-import Routes from '../routes/routes.class';
+import { Modules } from '../modules';
+import { Routes } from '../routes';
 
 export default {
 	modules: new Modules(),

@@ -1,11 +1,7 @@
 import Core from './core';
 
-export { ModuleAPI } from './modules/modules.types';
-export {
-	ChildRouteConfigComponentProps,
-	ModuleRouteConfig,
-	RouteConfigComponentProps,
-} from './routes/routes.types';
-export { default as useBreadcrumbs } from './breadcrumbs/useBreadcrumbs';
+export * from './modules/modules.types';
+export * from './routes/routes.types';
+export * from './breadcrumbs';
 
 export default Core;

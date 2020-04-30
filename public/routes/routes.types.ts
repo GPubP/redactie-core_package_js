@@ -1,6 +1,5 @@
 import { ComponentType } from 'react';
-import { RouteComponentProps, SwitchProps } from 'react-router-dom';
-import { Observable } from 'rxjs';
+import { RouteComponentProps } from 'react-router-dom';
 
 interface RouteExtraProps {
 	[propName: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -65,18 +64,6 @@ export interface ModuleRouteConfig extends BaseRouteConfig {
 
 export interface ChildModuleRouteConfig extends BaseRouteConfig {
 	component: ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
-
-export interface Routes {
-	register: (routeConfig: ModuleRouteConfig) => void;
-	getAll: () => ModuleRouteConfig[];
-	routesChanges: Observable<ModuleRouteConfig[] | null>;
-	render: (
-		routeConfig: ModuleRouteConfig[],
-		extraProps?: RouteExtraProps,
-		switchProps?: SwitchProps
-	) => object;
-	setPathPrefix: (prefix: string) => void;
 }
 
 export interface RouteOptions {

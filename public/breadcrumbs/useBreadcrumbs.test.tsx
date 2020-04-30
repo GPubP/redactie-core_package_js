@@ -105,7 +105,8 @@ describe('useBreadcrumbs', () => {
 			expect(getNodeText(breadcrumbItems[1].querySelector('a') as HTMLElement)).toBe('1');
 			expect(getNodeText(breadcrumbItems[2].querySelector('a') as HTMLElement)).toBe('Two');
 			expect(getNodeText(breadcrumbItems[3].querySelector('a') as HTMLElement)).toBe('test');
-			expect(getNodeText(breadcrumbItems[4] as HTMLElement)).toBe('4');
+			// The last breadcrumb is always empty
+			expect(getNodeText(breadcrumbItems[4] as HTMLElement)).toBe('');
 
 			// Test href
 			expect(
@@ -140,8 +141,12 @@ describe('useBreadcrumbs', () => {
 					path: '/one/two',
 					component: DummyRouteComponent,
 				},
+				{
+					path: '/one/two/three',
+					component: DummyRouteComponent,
+				},
 			];
-			const { breadcrumbItems } = renderRouter('/one/two', routes);
+			const { breadcrumbItems } = renderRouter('/one/two/three', routes);
 			if (breadcrumbItems) {
 				// Test breadcrumb name
 				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
@@ -150,7 +155,11 @@ describe('useBreadcrumbs', () => {
 				expect(getNodeText(breadcrumbItems[1].querySelector('a') as HTMLElement)).toBe(
 					'Override'
 				);
-				expect(getNodeText(breadcrumbItems[2] as HTMLElement)).toBe('Two');
+				expect(getNodeText(breadcrumbItems[2].querySelector('a') as HTMLElement)).toBe(
+					'Two'
+				);
+				// The last breadcrumb is always empty
+				expect(getNodeText(breadcrumbItems[3] as HTMLElement)).toBe('');
 			}
 		});
 
@@ -179,7 +188,8 @@ describe('useBreadcrumbs', () => {
 					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
 						'Home'
 					);
-					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('Two');
+					// The last breadcrumb is always empty
+					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('');
 				}
 			});
 
@@ -190,9 +200,17 @@ describe('useBreadcrumbs', () => {
 						breadcrumb: null,
 						component: DummyRouteComponent,
 					},
+					{
+						path: '/one',
+						component: DummyRouteComponent,
+					},
 				];
-				const { breadcrumbItems } = renderRouter('/', routes);
-				expect(breadcrumbItems).toHaveLength(0);
+				const { breadcrumbItems } = renderRouter('/one', routes);
+				expect(breadcrumbItems).toHaveLength(1);
+				if (breadcrumbItems) {
+					// The last breadcrumb is always empty
+					expect(getNodeText(breadcrumbItems[0] as HTMLElement)).toBe('');
+				}
 			});
 		});
 	});
@@ -223,7 +241,42 @@ describe('useBreadcrumbs', () => {
 					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
 						'Home'
 					);
-					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('Two');
+					// The last breadcrumb is always empty
+					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('');
+				}
+			});
+		});
+
+		describe('extraBreadcrumbs', () => {
+			it('should render some extra breadcrumbs before the generated breadcrumbs', () => {
+				const routes = [
+					{
+						path: '/',
+						breadcrumb: null,
+						component: DummyRouteComponent,
+					},
+					{
+						path: '/one',
+						component: DummyRouteComponent,
+					},
+				];
+				const extraBreadcrumb = {
+					name: 'Custom Home',
+					target: '/some/custom/path',
+				};
+				const { breadcrumbItems } = renderRouter('/one', routes, {
+					extraBreadcrumbs: [extraBreadcrumb],
+				});
+				if (breadcrumbItems) {
+					expect(breadcrumbItems).toHaveLength(2);
+					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
+						extraBreadcrumb.name
+					);
+					expect(
+						(breadcrumbItems[0].querySelector('a') as HTMLElement).getAttribute('href')
+					).toBe(extraBreadcrumb.target);
+					// The last breadcrumb is always empty
+					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('');
 				}
 			});
 		});
@@ -243,7 +296,6 @@ describe('useBreadcrumbs', () => {
 				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
 					'Home'
 				);
-				expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('One');
 			}
 		});
 	});
@@ -262,7 +314,6 @@ describe('useBreadcrumbs', () => {
 				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
 					'Home'
 				);
-				expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('One');
 			}
 		});
 	});

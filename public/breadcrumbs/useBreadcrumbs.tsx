@@ -182,15 +182,37 @@ const useBreadcrumbs = (
 	options?: BreadcrumbOptions
 ): React.ReactNode => {
 	const location = useLocation();
-	const breadcrumbs = useMemo(
-		() =>
-			getBreadcrumbs({
+	const breadcrumbs = useMemo(() => {
+		const breadcrumbs = [
+			...(options?.extraBreadcrumbs && Array.isArray(options?.extraBreadcrumbs)
+				? options.extraBreadcrumbs
+				: []),
+			...getBreadcrumbs({
 				routes: flattenRoutes(routes),
 				location,
 				options,
 			}),
-		[routes]
-	);
+		];
+		const breadcrumbsLength = breadcrumbs.length;
+
+		return breadcrumbs.map((breadcrumb, index) => {
+			/**
+			 * The latest breadcrumb is not visible for the user since the
+			 * title is used to indicate where the user is.
+			 * We can not remove the breadcrumb from the array
+			 * because the user can still see the `>` sign
+			 * Therefore we need to clear the name and the target properties
+			 */
+			if (breadcrumbsLength === index + 1) {
+				return {
+					...breadcrumb,
+					name: '',
+					target: '',
+				};
+			}
+			return breadcrumb;
+		});
+	}, [routes]);
 
 	const CustomLink = ({ href, name }: CustomLinkProps): React.ReactElement => {
 		return <Link to={href}>{name}</Link>;
