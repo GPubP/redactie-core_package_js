@@ -8,6 +8,7 @@
     "prepublishOnly": "npm run test && npm run build",
     "build:types": "tsc --emitDeclarationOnly",
     "build": "npm run build:types && webpack",
+    "build:w": "npm run build:types && webpack -w",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest ./public"
   },
