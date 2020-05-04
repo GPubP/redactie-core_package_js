@@ -208,6 +208,41 @@ const BreadcrumbsComponent = () => {
 
 ```
 
+#### Use your own breadcrumbs or combine them with the ones that are genarated based on the current location
+
+This can be useful when you don't to show breadcrumbs based on the current location or if you want to add some
+custom breadcrumbs before rendering the generated ones.
+
+```javascript
+import { useBreadcrumbs } from '@redactie/redactie-core'
+
+const BreadcrumbsComponent = () => {
+	const routes = [
+		{
+			path: '/',
+			breadcrumb: 'Home'
+		},
+	];
+	const breadcrumbs = useBreadcrumbs(routes, {
+		extraBreadcrumbs: [
+			{
+				name: 'Extra breadcrumb',
+				target: '/some/path'
+			}
+		]
+	});
+
+	return {
+		<>
+			{breadcrumbs}
+		</>
+	};
+}
+
+// Result
+// Extra breadcrumb > Home
+```
+
 #### Disable default generated breadcrumbs
 
 This package will attempt to create breadcrumbs for you based on the route section/segment. For example `/users` will automatically
