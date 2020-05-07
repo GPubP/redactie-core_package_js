@@ -13,6 +13,7 @@ export type BreadcrumbComponentProps = Breadcrumb;
 export interface BreadcrumbOptions {
 	excludePaths?: string[];
 	extraBreadcrumbs?: Breadcrumb[];
+	extraProps?: Record<string, unknown>;
 }
 
 export interface GetBreadcrumbsProps {

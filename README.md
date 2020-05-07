@@ -162,7 +162,7 @@ const BreadcrumbsComponent = () => {
 
 #### Custom breadcrumbs
 
-If you don't want to use the default breadcrumb that we created, you can pass a `string` or a `function` to the `breadcrumb` prop
+If you don't want to use the default breadcrumb that we created, you can pass a `string` or a `component` to the `breadcrumb` prop
 to create your own custom breadcrumb.
 
 
@@ -185,8 +185,8 @@ const BreadcrumbsComponent = () => {
 					routes: [
 						{
 							path: '/users/:userId'
-							breadcrumb: (props: BreadcrumbProps): string => {
-								return users[props.match.params?.userId].name
+							breadcrumb(props: BreadcrumbComponentProps) {
+								return <>{users[props.match.params?.userId].name}</>
 							},
 						}
 					]

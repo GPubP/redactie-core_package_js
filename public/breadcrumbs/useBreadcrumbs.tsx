@@ -204,14 +204,17 @@ const useBreadcrumbs = (
 			}
 			return breadcrumb;
 		});
-	}, [routes, options?.extraBreadcrumbs, options]);
+	}, [routes, options?.extraBreadcrumbs, options?.extraProps, options]);
 
 	const CustomLink = ({ href, breadcrumb }: CustomLinkProps): React.ReactElement => {
 		return (
 			<Link to={href}>
 				{typeof breadcrumb.name === 'string'
 					? breadcrumb.name
-					: React.createElement(breadcrumb.name, breadcrumb)}
+					: React.createElement(breadcrumb.name, {
+							...breadcrumb,
+							...options?.extraProps,
+					  })}
 			</Link>
 		);
 	};
