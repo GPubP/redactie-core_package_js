@@ -1,5 +1,6 @@
 import { ComponentType, ElementType } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, SwitchProps } from 'react-router-dom';
+import { Observable } from 'rxjs';
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
 	extends RouteComponentProps<Params> {
@@ -47,6 +48,18 @@ export interface BaseRouteConfig {
 export interface ModuleRouteConfig extends BaseRouteConfig {
 	component: ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 	isDefaultRoute?: boolean;
+}
+
+export interface Routes {
+	register: (routeConfig: ModuleRouteConfig) => void;
+	getAll: () => ModuleRouteConfig[];
+	routesChanges: Observable<ModuleRouteConfig[] | null>;
+	render: (
+		routeConfig: ModuleRouteConfig[],
+		extraProps?: Record<string, unknown>,
+		switchProps?: SwitchProps
+	) => object;
+	setPathPrefix: (prefix: string) => void;
 }
 
 export interface ChildModuleRouteConfig extends BaseRouteConfig {
