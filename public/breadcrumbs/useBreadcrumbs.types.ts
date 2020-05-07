@@ -1,11 +1,14 @@
+import { ComponentType, ElementType } from 'react';
 import { Match, ModuleRouteConfig, Location } from '../routes/routes.types';
 
 export interface Breadcrumb {
 	match?: Match;
 	location?: Location;
-	name: string;
+	name: ComponentType | ElementType | string;
 	target: string;
 }
+
+export type BreadcrumbComponentProps = Breadcrumb;
 
 export interface BreadcrumbOptions {
 	excludePaths?: string[];
@@ -28,5 +31,5 @@ export interface GetBreadcrumbMatchProps {
 
 export interface CustomLinkProps {
 	href: string;
-	name: string;
+	breadcrumb: Breadcrumb;
 }
