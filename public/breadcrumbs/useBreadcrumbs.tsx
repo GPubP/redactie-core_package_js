@@ -99,15 +99,7 @@ const getBreadcrumbMatch = ({
 				match,
 				location,
 				target: match.url,
-				name:
-					typeof parsedBreadcrumb === 'function'
-						? parsedBreadcrumb({
-								match,
-								location,
-								key: match.url,
-								currentSection,
-						  })
-						: parsedBreadcrumb,
+				name: parsedBreadcrumb,
 			};
 			return true;
 		}
@@ -212,10 +204,19 @@ const useBreadcrumbs = (
 			}
 			return breadcrumb;
 		});
-	}, [routes]);
+	}, [routes, options?.extraBreadcrumbs, options?.extraProps, options]);
 
-	const CustomLink = ({ href, name }: CustomLinkProps): React.ReactElement => {
-		return <Link to={href}>{name}</Link>;
+	const CustomLink = ({ href, breadcrumb }: CustomLinkProps): React.ReactElement => {
+		return (
+			<Link to={href}>
+				{typeof breadcrumb.name === 'string'
+					? breadcrumb.name
+					: React.createElement(breadcrumb.name, {
+							...breadcrumb,
+							...options?.extraProps,
+					  })}
+			</Link>
+		);
 	};
 
 	return (
@@ -225,7 +226,7 @@ const useBreadcrumbs = (
 				return {
 					...props,
 					component: CustomLink,
-					name: breadcrumbs.find((breadcrumb) => breadcrumb.target === props.href)?.name,
+					breadcrumb: breadcrumbs.find((breadcrumb) => breadcrumb.target === props.href),
 				};
 			}}
 			items={breadcrumbs}

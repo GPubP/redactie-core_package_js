@@ -2,10 +2,10 @@ import { render, getNodeText } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter as Router } from 'react-router-dom';
 
-import { ModuleRouteConfig, BreadcrumbProps } from '../routes/routes.types';
+import { ModuleRouteConfig } from '../routes/routes.types';
 
 import useBreadcrumbs from './useBreadcrumbs';
-import { BreadcrumbOptions } from './useBreadcrumbs.types';
+import { BreadcrumbOptions, BreadcrumbComponentProps } from './useBreadcrumbs.types';
 
 const BreadcrumbComponent = ({
 	routes,
@@ -69,19 +69,19 @@ describe('useBreadcrumbs', () => {
 				breadcrumb: 'Two',
 				component: DummyRouteComponent,
 			},
-			// test simple breadcrumb function
+			// test simple breadcrumb component
 			{
 				path: '/1/2/3',
-				breadcrumb: (): string => {
-					return 'test';
+				breadcrumb(): React.ReactElement {
+					return <>test</>;
 				},
 				component: DummyRouteComponent,
 			},
-			// test advanced breadcrumb function (user can use `match` however they wish)
+			// test advanced breadcrumb component (user can use `match` however they wish)
 			{
 				path: '/1/2/3/:number',
-				breadcrumb: (props: BreadcrumbProps): string => {
-					return props.match.params?.number;
+				breadcrumb({ match }: BreadcrumbComponentProps): React.ReactElement {
+					return <>{match?.params?.number}</>;
 				},
 				component: DummyRouteComponent,
 			},

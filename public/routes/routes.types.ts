@@ -1,11 +1,6 @@
-import { ComponentType } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-
-interface RouteExtraProps {
-	[propName: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
-
-export type BreadcrumbFunction = (props: BreadcrumbProps) => string;
+import { ComponentType, ElementType } from 'react';
+import { RouteComponentProps, SwitchProps } from 'react-router-dom';
+import { Observable } from 'rxjs';
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
 	extends RouteComponentProps<Params> {
@@ -30,19 +25,12 @@ export interface Match {
 	isExact?: boolean;
 }
 
-export interface BreadcrumbProps {
-	match: Match;
-	location: Location;
-	key: string;
-	currentSection: string;
-}
-
 export interface BaseRouteConfig {
 	key?: string;
 	label?: string;
 	path: string;
 	routes?: ChildModuleRouteConfig[];
-	breadcrumb?: BreadcrumbFunction | string | null;
+	breadcrumb?: ComponentType | ElementType | string | null;
 	navigation?: {
 		context?: string;
 		renderContext?: string;
@@ -60,6 +48,18 @@ export interface BaseRouteConfig {
 export interface ModuleRouteConfig extends BaseRouteConfig {
 	component: ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 	isDefaultRoute?: boolean;
+}
+
+export interface Routes {
+	register: (routeConfig: ModuleRouteConfig) => void;
+	getAll: () => ModuleRouteConfig[];
+	routesChanges: Observable<ModuleRouteConfig[] | null>;
+	render: (
+		routeConfig: ModuleRouteConfig[],
+		extraProps?: Record<string, unknown>,
+		switchProps?: SwitchProps
+	) => object;
+	setPathPrefix: (prefix: string) => void;
 }
 
 export interface ChildModuleRouteConfig extends BaseRouteConfig {
