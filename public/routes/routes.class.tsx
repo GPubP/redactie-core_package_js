@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Observable, ReplaySubject } from 'rxjs';
-import { Route, RouteComponentProps, Switch, SwitchProps, Redirect } from 'react-router-dom';
+import { RouteComponentProps, Switch, SwitchProps, Redirect } from 'react-router-dom';
+import { GuardProvider, GuardedRoute, GuardProviderProps } from 'react-router-guards';
 import { ModuleRouteConfig, ChildModuleRouteConfig, RouteOptions } from './routes.types';
 
 export default class Routes {
@@ -72,21 +73,23 @@ export default class Routes {
 	public render(
 		routes: ModuleRouteConfig[] | undefined,
 		extraProps: { [key: string]: any } = {}, // eslint-disable-line @typescript-eslint/no-explicit-any
-		switchProps: SwitchProps = {}
+		switchProps: SwitchProps = {},
+		guardProviderProps: GuardProviderProps = {}
 	): ReactElement | null {
 		const redirectRoute = routes?.find((route) => route.isDefaultRoute);
 
 		return routes ? (
-			<>
+			<GuardProvider {...guardProviderProps}>
 				<Switch {...switchProps}>
 					{redirectRoute && (
 						<Redirect exact from={this.pathPrefix} to={redirectRoute.path} />
 					)}
 					{routes.map((route, index) => {
 						return (
-							<Route
+							<GuardedRoute
 								key={route.key || index}
 								path={route.path}
+								{...route.guardOptions}
 								render={(props: RouteComponentProps): JSX.Element =>
 									route.render ? (
 										route.render({ ...props, ...extraProps, route: route })
@@ -98,7 +101,7 @@ export default class Routes {
 						);
 					})}
 				</Switch>
-			</>
+			</GuardProvider>
 		) : null;
 	}
 

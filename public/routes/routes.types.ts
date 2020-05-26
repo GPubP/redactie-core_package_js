@@ -1,6 +1,9 @@
 import { ComponentType, ElementType } from 'react';
 import { RouteComponentProps, SwitchProps } from 'react-router-dom';
+import { GuardFunction, PageComponent } from 'react-router-guards';
 import { Observable } from 'rxjs';
+
+export { GuardFunction, PageComponent } from 'react-router-guards';
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
 	extends RouteComponentProps<Params> {
@@ -31,6 +34,12 @@ export interface BaseRouteConfig {
 	path: string;
 	routes?: ChildModuleRouteConfig[];
 	breadcrumb?: ComponentType | ElementType | string | null;
+	guardOptions?: {
+		guards?: GuardFunction[];
+		ignoreGlobal?: boolean;
+		loading?: PageComponent;
+		error?: PageComponent;
+	};
 	navigation?: {
 		context?: string;
 		renderContext?: string;
@@ -50,6 +59,10 @@ export interface ModuleRouteConfig extends BaseRouteConfig {
 	isDefaultRoute?: boolean;
 }
 
+export interface ChildModuleRouteConfig extends BaseRouteConfig {
+	component: ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
 export interface Routes {
 	register: (routeConfig: ModuleRouteConfig) => void;
 	getAll: () => ModuleRouteConfig[];
@@ -60,10 +73,6 @@ export interface Routes {
 		switchProps?: SwitchProps
 	) => object;
 	setPathPrefix: (prefix: string) => void;
-}
-
-export interface ChildModuleRouteConfig extends BaseRouteConfig {
-	component: ComponentType<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export interface RouteOptions {
