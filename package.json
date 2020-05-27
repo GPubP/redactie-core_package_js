@@ -56,6 +56,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
+    "react-router-guards": "^1.0.2",
     "ts-loader": "6.2.1",
     "typescript": "3.7.5",
     "webpack": "4.41.5",
@@ -66,7 +67,8 @@
     "@acpaas-ui/react-components": "^4.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "react-router-guards": "^1.0.2"
   },
   "author": "Glenn Verschooren",
   "license": "ISC",

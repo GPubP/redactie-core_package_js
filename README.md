@@ -125,7 +125,63 @@ Core.routes.routesChanges.subscribe(routes => ...);
 | routes        | Array          | no            | /                             | Child routes            |
 | breadcrumb    | Function,String| no            | defaults to path segment      | Breadcrumb name         |
 | matchOptions  | Object         | no            | { exact: true, strict: false }| Route matchOptions      |
+| guardOptions  | Object         | no            | /                             | Guard options           |
 
+### Guards
+> Use guards to prevent the user from accessing routes
+
+We are using the [react router guards](https://github.com/Upstatement/react-router-guards) package
+
+```javascript
+interface GuardOptions {
+  guards?: GuardFunction[];
+  ignoreGlobal?: boolean;
+  loading?: PageComponent;
+  error?: PageComponent;
+}
+```
+| Prop           | Optional | Description                                                 | Notes                                                                                                                                                                           |
+| -------------- | :------: | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `guards`       |    ✅    | the guards to set for this route                            | It's important to note that guards set by the `GuardedRoute` will be added to the _end_ of the middleware queue set by its parent [`GuardedProvider`](https://github.com/Upstatement/react-router-guards/blob/master/docs/guard-provider.md). |
+| `ignoreGlobal` |    ✅    | whether to ignore guards set by parent `GuardedProvider`s   |                                                                                                                                                                                 |
+| `loading`      |    ✅    | the [loading page](https://github.com/Upstatement/react-router-guards/blob/master/docs/page-components.md) for this route | Overrides the global loading page, if value provided.                                                                                                                           |
+| `error`        |    ✅    | the [error page](https://github.com/Upstatement/react-router-guards/blob/master/docs/page-components.md) for this route   | Overrides the global error page, if value provided.                                                                                                                             |
+
+```javascript
+const requireLogin = (to, from, next) => {
+  if (to.meta.auth) {
+    if (getIsLoggedIn()) {
+      next();
+    }
+    next.redirect('/login');
+  } else {
+    next();
+  }
+};
+
+const UsersComponent = () => {
+	const routes = [{
+		path: '/users',
+		component: Dashboard,
+		label: 'Users',
+		// Guards on route level
+		guardOptions: {
+			guards: [],
+		}
+	}];
+	return (
+		<>
+			{Core.routes.render(routes, {}, {}, {
+				// GuardProvider options
+				loading: LoadingPage,
+				error: ErrorPage,
+				guards: [requireLogin]
+			})}
+		</>
+	);
+};
+
+```
 
 ### Breadcrumbs
 > Use Breadcrumbs API to generate a nice Breadcrumb component

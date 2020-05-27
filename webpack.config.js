@@ -28,6 +28,7 @@ module.exports = {
 		react: 'react',
 		'react-dom': 'react-dom',
 		'react-router-dom': 'react-router-dom',
+		'react-router-guards': 'react-router-guards',
 		'@acpaas-ui/react-components': '@acpaas-ui/react-components',
 	},
 	output: {

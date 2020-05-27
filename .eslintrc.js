@@ -40,6 +40,7 @@ module.exports = {
 			'functions': 'never'
 		}],
 		'semi': 'off',
-		'@typescript-eslint/semi': ['error', 'always', { 'omitLastInOneLineBlock': true}]
+		'@typescript-eslint/semi': ['error', 'always', { 'omitLastInOneLineBlock': true}],
+		"react/prop-types": "off"
 	}
 };
