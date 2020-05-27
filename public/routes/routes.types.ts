@@ -39,6 +39,8 @@ export interface BaseRouteConfig {
 		ignoreGlobal?: boolean;
 		loading?: PageComponent;
 		error?: PageComponent;
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		meta?: Record<string, any>;
 	};
 	navigation?: {
 		context?: string;
