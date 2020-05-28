@@ -34,7 +34,7 @@ export interface RouteNavigationConfig {
 	label: string;
 	order?: number;
 	parentPath?: string;
-	canShown: CanShownFunction[];
+	canShown?: CanShownFunction[];
 }
 
 export interface RouteGuardConfig {
