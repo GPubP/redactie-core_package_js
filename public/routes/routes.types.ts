@@ -28,27 +28,32 @@ export interface Match {
 	isExact?: boolean;
 }
 
+export interface RouteNavigationConfig {
+	context?: string;
+	renderContext?: string;
+	label: string;
+	order?: number;
+	parentPath?: string;
+	canShown?: CanShownFunction[];
+}
+
+export interface RouteGuardConfig {
+	guards?: GuardFunction[];
+	ignoreGlobal?: boolean;
+	loading?: PageComponent;
+	error?: PageComponent;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	meta?: Record<string, any>;
+}
+
 export interface BaseRouteConfig {
 	key?: string;
 	label?: string;
 	path: string;
 	routes?: ChildModuleRouteConfig[];
 	breadcrumb?: ComponentType | ElementType | string | null;
-	guardOptions?: {
-		guards?: GuardFunction[];
-		ignoreGlobal?: boolean;
-		loading?: PageComponent;
-		error?: PageComponent;
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		meta?: Record<string, any>;
-	};
-	navigation?: {
-		context?: string;
-		renderContext?: string;
-		label: string;
-		order?: number;
-		parentPath?: string;
-	};
+	guardOptions?: RouteGuardConfig;
+	navigation?: RouteNavigationConfig;
 	matchOptions?: {
 		exact?: boolean;
 		strict?: boolean;
@@ -80,3 +85,7 @@ export interface Routes {
 export interface RouteOptions {
 	prefix: boolean;
 }
+
+export type Next = () => void;
+
+export type CanShownFunction = (meta: Record<string, unknown>, next: Next) => void;
