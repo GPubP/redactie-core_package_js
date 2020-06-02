@@ -3,7 +3,7 @@ import { filter, map } from 'rxjs/operators';
 
 import { ModuleAPI, ModuleAPIMap } from './modules.types';
 
-export default class Modules {
+class Modules {
 	private registeredModules: ModuleAPIMap = {};
 	private registeredModulesSubject = new BehaviorSubject<ModuleAPIMap>({});
 
@@ -19,14 +19,16 @@ export default class Modules {
 		this.registeredModulesSubject.next(this.registeredModules);
 	}
 
-	public getModuleAPI(moduleName: string): ModuleAPI {
+	public getModuleAPI<T>(moduleName: string): T {
 		return this.registeredModules[moduleName];
 	}
 
-	public selectModuleAPI(moduleName: string): Observable<ModuleAPI> {
+	public selectModuleAPI<T>(moduleName: string): Observable<T> {
 		return this.registeredModules$.pipe(
-			filter((modules) => modules[moduleName]),
-			map((modules) => modules[moduleName])
+			filter((modules: ModuleAPIMap) => modules[moduleName]),
+			map((modules: ModuleAPIMap) => modules[moduleName] as T)
 		);
 	}
 }
+
+export default Modules;
