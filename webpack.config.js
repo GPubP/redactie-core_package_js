@@ -30,6 +30,8 @@ module.exports = {
 		'react-router-dom': 'react-router-dom',
 		'react-router-guards': 'react-router-guards',
 		'@acpaas-ui/react-components': '@acpaas-ui/react-components',
+		rxjs: 'rxjs',
+		'rxjs/operators': 'rxjs/operators',
 	},
 	output: {
 		filename: 'redactie-core.umd.js',
