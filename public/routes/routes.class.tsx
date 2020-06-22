@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Observable, ReplaySubject } from 'rxjs';
 import { RouteComponentProps, Switch, SwitchProps, Redirect } from 'react-router-dom';
-import { GuardProvider, GuardedRoute, GuardProviderProps } from 'react-router-guards';
+import { GuardProvider, GuardedRoute, GuardProviderProps } from '@redactie/react-router-guards';
 import { ModuleRouteConfig, ChildModuleRouteConfig, RouteOptions } from './routes.types';
 
 export default class Routes {
@@ -77,6 +77,26 @@ export default class Routes {
 		guardProviderProps: GuardProviderProps = {}
 	): ReactElement | null {
 		const redirectRoute = routes?.find((route) => route.isDefaultRoute);
+		const isPathChanged = (
+			routePrevProps: RouteComponentProps,
+			routeProps: RouteComponentProps,
+			path?: string | string[]
+		): boolean => {
+			if (routeProps.location.pathname !== routePrevProps.location.pathname) {
+				// Check if the previous and next routes are child routes
+				const prevRouteIsChild = routePrevProps.match.path === path;
+				const nextRouteIsChild = routeProps.match.path === path;
+
+				// Don't check the guard functions from a parent route when we navigate between
+				// child routes
+				// example:
+				//		naviagte to /sites => check site guards
+				// 		navihate from /sites to /sites/123/detail => The site guard is not called because is only protects /sites
+				return !(prevRouteIsChild && nextRouteIsChild);
+			}
+
+			return false;
+		};
 
 		return routes ? (
 			<GuardProvider {...guardProviderProps}>
@@ -89,6 +109,7 @@ export default class Routes {
 							<GuardedRoute
 								key={route.key || index}
 								path={route.path}
+								pathChanged={isPathChanged}
 								{...route.guardOptions}
 								render={(props: RouteComponentProps): JSX.Element =>
 									route.render ? (

@@ -1,9 +1,9 @@
 import { ComponentType, ElementType } from 'react';
 import { RouteComponentProps, SwitchProps } from 'react-router-dom';
-import { GuardFunction, PageComponent } from 'react-router-guards';
+import { GuardFunction, PageComponent } from '@redactie/react-router-guards';
 import { Observable } from 'rxjs';
 
-export { GuardFunction, PageComponent } from 'react-router-guards';
+export { GuardFunction, PageComponent } from '@redactie/react-router-guards';
 
 export interface RouteConfigComponentProps<Params extends { [K in keyof Params]?: string } = {}>
 	extends RouteComponentProps<Params> {
