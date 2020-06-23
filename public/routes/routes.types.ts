@@ -51,6 +51,8 @@ export interface BaseRouteConfig {
 	label?: string;
 	path: string;
 	routes?: ChildModuleRouteConfig[];
+	exact?: boolean;
+	strict?: boolean;
 	redirect?: string;
 	breadcrumb?: ComponentType | ElementType | string | null;
 	guardOptions?: RouteGuardConfig;
