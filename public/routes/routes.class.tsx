@@ -115,7 +115,9 @@ export default class Routes {
 									route.redirect ? (
 										<Redirect
 											from={route.path}
-											to={generatePath(route.redirect, props.match.params)}
+											to={generatePath(route.redirect, {
+												...props.match.params,
+											})}
 										></Redirect>
 									) : route.render ? (
 										route.render({ ...props, ...extraProps, route: route })
@@ -136,6 +138,9 @@ export default class Routes {
 		return {
 			...routeConfig,
 			path: `${this.pathPrefix}${routeConfig.path}`,
+			redirect: routeConfig.redirect
+				? `${this.pathPrefix}${routeConfig.redirect}`
+				: undefined,
 			routes:
 				routeConfig.routes && routeConfig.routes.map((route) => this.prefixRoute(route)),
 			navigation: routeConfig.navigation
