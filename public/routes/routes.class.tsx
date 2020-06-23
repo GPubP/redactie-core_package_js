@@ -90,8 +90,8 @@ export default class Routes {
 				// Don't check the guard functions from a parent route when we navigate between
 				// child routes
 				// example:
-				//		naviagte to /sites => check site guards
-				// 		navihate from /sites to /sites/123/detail => The site guard is not called because is only protects /sites
+				//		navigate to /sites => check site guards
+				// 		navigate from /sites to /sites/123/detail => The site guard is not called because is only protects /sites
 				return !(prevRouteIsChild && nextRouteIsChild);
 			}
 
