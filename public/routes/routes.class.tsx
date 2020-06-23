@@ -82,10 +82,10 @@ export default class Routes {
 			routeProps: RouteComponentProps,
 			path?: string | string[]
 		): boolean => {
-			if (routeProps.location.pathname !== routePrevProps.location.pathname) {
+			if (routeProps?.location?.pathname !== routePrevProps?.location?.pathname) {
 				// Check if the previous and next routes are child routes
-				const prevRouteIsChild = routePrevProps.match.path === path;
-				const nextRouteIsChild = routeProps.match.path === path;
+				const prevRouteIsChild = routePrevProps?.match?.path === path;
+				const nextRouteIsChild = routeProps?.match?.path === path;
 
 				// Don't check the guard functions from a parent route when we navigate between
 				// child routes
