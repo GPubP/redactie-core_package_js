@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Observable, ReplaySubject } from 'rxjs';
-import { RouteComponentProps, Switch, SwitchProps, Redirect } from 'react-router-dom';
+import { RouteComponentProps, Switch, SwitchProps, Redirect, generatePath } from 'react-router-dom';
 import { GuardProvider, GuardedRoute, GuardProviderProps } from '@redactie/react-router-guards';
 import { ModuleRouteConfig, ChildModuleRouteConfig, RouteOptions } from './routes.types';
 
@@ -112,7 +112,12 @@ export default class Routes {
 								pathChanged={isPathChanged}
 								{...route.guardOptions}
 								render={(props: RouteComponentProps): JSX.Element =>
-									route.render ? (
+									route.redirect ? (
+										<Redirect
+											from={route.path}
+											to={generatePath(route.redirect, props.match.params)}
+										></Redirect>
+									) : route.render ? (
 										route.render({ ...props, ...extraProps, route: route })
 									) : (
 										<route.component {...props} {...extraProps} route={route} />
