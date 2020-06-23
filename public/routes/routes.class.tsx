@@ -113,14 +113,19 @@ export default class Routes {
 								{...route.guardOptions}
 								render={(props: RouteComponentProps): JSX.Element =>
 									route.redirect ? (
-										<Redirect
-											from={route.path}
-											to={generatePath(route.redirect, {
-												...props.match.params,
-											})}
-										></Redirect>
-									) : route.render ? (
-										route.render({ ...props, ...extraProps, route: route })
+										<>
+											<Redirect
+												from={route.path}
+												to={generatePath(route.redirect, {
+													...props.match.params,
+												})}
+											/>
+											<route.component
+												{...props}
+												{...extraProps}
+												route={route}
+											/>
+										</>
 									) : (
 										<route.component {...props} {...extraProps} route={route} />
 									)
