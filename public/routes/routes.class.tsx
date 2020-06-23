@@ -91,7 +91,7 @@ export default class Routes {
 				// child routes
 				// example:
 				//		navigate to /sites => check site guards
-				// 		navigate from /sites to /sites/123/detail => The site guard is not called because is only protects /sites
+				// 		navigate from /sites to /sites/123/detail => The site guard is not called because it only protects /sites
 				return !(prevRouteIsChild && nextRouteIsChild);
 			}
 
