@@ -110,7 +110,6 @@ export default class Routes {
 								key={route.key || index}
 								path={route.path}
 								pathChanged={isPathChanged}
-								exact={route.exact}
 								strict={route.strict}
 								{...route.guardOptions}
 								render={(props: RouteComponentProps): JSX.Element =>
