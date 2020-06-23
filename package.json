@@ -1,6 +1,6 @@
 {
   "name": "@redactie/redactie-core",
-  "version": "1.10.2",
+  "version": "1.10.3",
   "description": "Redactie core package",
   "main": "dist/redactie-core.umd.js",
   "types": "dist/index.d.ts",
