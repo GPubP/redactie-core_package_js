@@ -35,6 +35,7 @@ export interface RouteNavigationConfig {
 	order?: number;
 	parentPath?: string;
 	canShown?: CanShownFunction[];
+	logoUrl?: string;
 }
 
 export interface RouteGuardConfig {
