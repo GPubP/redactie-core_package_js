@@ -12,7 +12,7 @@ describe('[UNIT - Loader]', () => {
 		});
 
 		expect(loader.isLoading).toBeTruthy();
-		expect(loader.loaderItems$.value).toContainEqual({
+		expect(loader.loaderItems).toContainEqual({
 			key: 'loader-1',
 			label: 'Entity-x',
 			isLoading: true,

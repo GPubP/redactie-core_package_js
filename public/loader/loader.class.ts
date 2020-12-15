@@ -3,22 +3,23 @@ import { map } from 'rxjs/operators';
 import { LoaderItem } from './loader.types';
 
 export default class Loader {
-	private loaderItems: LoaderItem[] = [];
+	private _loaderItems$: BehaviorSubject<LoaderItem[]> = new BehaviorSubject<LoaderItem[]>([]);
 
-	public loaderItems$: BehaviorSubject<LoaderItem[]> = new BehaviorSubject<LoaderItem[]>(
-		this.loaderItems
-	);
+	public loaderItems$: Observable<LoaderItem[]> = this._loaderItems$.asObservable();
 	public isLoading$: Observable<boolean> = this.loaderItems$.pipe(
 		map((loaderItems) => !!loaderItems.find((loaderItem) => loaderItem.isLoading))
 	);
+
+	public get loaderItems(): LoaderItem[] {
+		return this._loaderItems$.value;
+	}
 
 	public get isLoading(): boolean {
 		return !!this.loaderItems.find((loaderItem) => loaderItem.isLoading);
 	}
 
 	public addLoader(loaderItem: LoaderItem): void {
-		this.loaderItems.push(loaderItem);
-		this.loaderItems$.next(this.loaderItems);
+		this._loaderItems$.next([...this.loaderItems, loaderItem]);
 	}
 
 	public setLoading(key: string, isLoading: boolean): void {
@@ -29,7 +30,7 @@ export default class Loader {
 		}
 
 		loaderItem.isLoading = isLoading;
-		this.loaderItems$.next(this.loaderItems);
+		this._loaderItems$.next(this.loaderItems);
 	}
 
 	public removeLoader(key: string): void {
@@ -39,7 +40,9 @@ export default class Loader {
 			return;
 		}
 
-		this.loaderItems.splice(loaderIndex, 1);
-		this.loaderItems$.next(this.loaderItems);
+		const oldLoaderItems = this.loaderItems;
+
+		oldLoaderItems.splice(loaderIndex, 1);
+		this._loaderItems$.next(oldLoaderItems);
 	}
 }
