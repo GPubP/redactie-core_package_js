@@ -97,7 +97,7 @@ describe('useBreadcrumbs', () => {
 		const { breadcrumbItems } = renderRouter('/1/2/3/4', routes);
 
 		expect(breadcrumbItems).not.toBeNull();
-		expect(breadcrumbItems).toHaveLength(5);
+		expect(breadcrumbItems).toHaveLength(6);
 
 		if (breadcrumbItems) {
 			// Test breadcrumb name
@@ -158,8 +158,10 @@ describe('useBreadcrumbs', () => {
 				expect(getNodeText(breadcrumbItems[2].querySelector('a') as HTMLElement)).toBe(
 					'Two'
 				);
-				// The last breadcrumb is always empty
-				expect(getNodeText(breadcrumbItems[3] as HTMLElement)).toBe('');
+				expect(getNodeText(breadcrumbItems[3].querySelector('a') as HTMLElement)).toBe(
+					'Three'
+				);
+				expect(getNodeText(breadcrumbItems[4] as HTMLElement)).toBe('');
 			}
 		});
 
@@ -188,8 +190,9 @@ describe('useBreadcrumbs', () => {
 					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
 						'Home'
 					);
-					// The last breadcrumb is always empty
-					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('');
+					expect(getNodeText(breadcrumbItems[1].querySelector('a') as HTMLElement)).toBe(
+						'Two'
+					);
 				}
 			});
 
@@ -206,10 +209,11 @@ describe('useBreadcrumbs', () => {
 					},
 				];
 				const { breadcrumbItems } = renderRouter('/one', routes);
-				expect(breadcrumbItems).toHaveLength(1);
+				expect(breadcrumbItems).toHaveLength(2);
 				if (breadcrumbItems) {
-					// The last breadcrumb is always empty
-					expect(getNodeText(breadcrumbItems[0] as HTMLElement)).toBe('');
+					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
+						'One'
+					);
 				}
 			});
 		});
@@ -237,12 +241,13 @@ describe('useBreadcrumbs', () => {
 					excludePaths: ['/one'],
 				});
 				if (breadcrumbItems) {
-					expect(breadcrumbItems).toHaveLength(2);
+					expect(breadcrumbItems).toHaveLength(3);
 					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
 						'Home'
 					);
-					// The last breadcrumb is always empty
-					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('');
+					expect(getNodeText(breadcrumbItems[1].querySelector('a') as HTMLElement)).toBe(
+						'Two'
+					);
 				}
 			});
 		});
@@ -268,15 +273,16 @@ describe('useBreadcrumbs', () => {
 					extraBreadcrumbs: [extraBreadcrumb],
 				});
 				if (breadcrumbItems) {
-					expect(breadcrumbItems).toHaveLength(2);
+					expect(breadcrumbItems).toHaveLength(3);
 					expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
 						extraBreadcrumb.name
 					);
 					expect(
 						(breadcrumbItems[0].querySelector('a') as HTMLElement).getAttribute('href')
 					).toBe(extraBreadcrumb.target);
-					// The last breadcrumb is always empty
-					expect(getNodeText(breadcrumbItems[1] as HTMLElement)).toBe('');
+					expect(getNodeText(breadcrumbItems[1].querySelector('a') as HTMLElement)).toBe(
+						'One'
+					);
 				}
 			});
 		});
@@ -292,7 +298,7 @@ describe('useBreadcrumbs', () => {
 			];
 			const { breadcrumbItems } = renderRouter('/one/', routes);
 			if (breadcrumbItems) {
-				expect(breadcrumbItems).toHaveLength(2);
+				expect(breadcrumbItems).toHaveLength(3);
 				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
 					'Home'
 				);
@@ -310,7 +316,7 @@ describe('useBreadcrumbs', () => {
 			];
 			const { breadcrumbItems } = renderRouter('/one?mock=query', routes);
 			if (breadcrumbItems) {
-				expect(breadcrumbItems).toHaveLength(2);
+				expect(breadcrumbItems).toHaveLength(3);
 				expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe(
 					'Home'
 				);
