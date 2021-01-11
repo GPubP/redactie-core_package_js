@@ -1,22 +1,22 @@
-import React, { useMemo } from 'react';
 import { Breadcrumbs } from '@acpaas-ui/react-components';
-import { useLocation, matchPath, Link } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { Link, matchPath, useLocation } from 'react-router-dom';
 
 import { ModuleRouteConfig } from '../routes/routes.types';
 
 import {
-	Breadcrumb,
-	BreadcrumbOptions,
-	GetBreadcrumbsProps,
-	GetBreadcrumbMatchProps,
-	CustomLinkProps,
-} from './useBreadcrumbs.types';
-import {
 	DEFAULT_MATCH_OPTIONS,
-	NO_BREADCRUMB,
 	DEFAULT_NOT_FOUND_URL,
 	DEFAULT_ROOT_BREADCRUMB_NAME,
+	NO_BREADCRUMB,
 } from './useBreadcrumbs.const';
+import {
+	Breadcrumb,
+	BreadcrumbOptions,
+	CustomLinkProps,
+	GetBreadcrumbMatchProps,
+	GetBreadcrumbsProps,
+} from './useBreadcrumbs.types';
 
 /**
  * This method was "borrowed" from https://stackoverflow.com/a/28339742
@@ -130,6 +130,10 @@ const getBreadcrumbs = ({ routes, location, options = {} }: GetBreadcrumbsProps)
 	const { pathname } = location;
 	const matches: Breadcrumb[] = [];
 
+	if (!Array.isArray(routes) || routes.length === 0) {
+		return [];
+	}
+
 	// Get pathname from url
 	// https://developer.mozilla.org/en-US/docs/Web/API/URL/pathname
 	const url = new URL(`https://mock.be${pathname}`);
@@ -189,19 +193,21 @@ const useBreadcrumbs = (
 				target: '',
 			},
 		],
-		[routes, options?.extraBreadcrumbs, options?.extraProps, options]
+		[options, routes, location]
 	);
 
 	const CustomLink = ({ href, breadcrumb }: CustomLinkProps): React.ReactElement => {
 		return (
-			<Link to={href}>
-				{typeof breadcrumb.name === 'string'
-					? breadcrumb.name
-					: React.createElement(breadcrumb.name, {
-							...breadcrumb,
-							...options?.extraProps,
-					  })}
-			</Link>
+			<>
+				{typeof breadcrumb.name === 'string' ? (
+					<Link to={href}>{breadcrumb.name}</Link>
+				) : (
+					React.createElement(breadcrumb.name, {
+						...breadcrumb,
+						...options?.extraProps,
+					})
+				)}
+			</>
 		);
 	};
 
