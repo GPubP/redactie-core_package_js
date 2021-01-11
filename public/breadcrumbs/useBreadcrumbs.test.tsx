@@ -73,7 +73,7 @@ describe('useBreadcrumbs', () => {
 			{
 				path: '/1/2/3',
 				breadcrumb(): React.ReactElement {
-					return <>test</>;
+					return <p>test</p>;
 				},
 				component: DummyRouteComponent,
 			},
@@ -81,7 +81,7 @@ describe('useBreadcrumbs', () => {
 			{
 				path: '/1/2/3/:number',
 				breadcrumb({ match }: BreadcrumbComponentProps): React.ReactElement {
-					return <>{match?.params?.number}</>;
+					return <p>{match?.params?.number}</p>;
 				},
 				component: DummyRouteComponent,
 			},
@@ -104,9 +104,11 @@ describe('useBreadcrumbs', () => {
 			expect(getNodeText(breadcrumbItems[0].querySelector('a') as HTMLElement)).toBe('Home');
 			expect(getNodeText(breadcrumbItems[1].querySelector('a') as HTMLElement)).toBe('1');
 			expect(getNodeText(breadcrumbItems[2].querySelector('a') as HTMLElement)).toBe('Two');
-			expect(getNodeText(breadcrumbItems[3].querySelector('a') as HTMLElement)).toBe('test');
+			expect(getNodeText(breadcrumbItems[3].querySelector('p') as HTMLElement)).toBe('test');
+			expect(getNodeText(breadcrumbItems[4].querySelector('p') as HTMLElement)).toBe('4');
+
 			// The last breadcrumb is always empty
-			expect(getNodeText(breadcrumbItems[4] as HTMLElement)).toBe('');
+			expect(getNodeText(breadcrumbItems[5] as HTMLElement)).toBe('');
 
 			// Test href
 			expect(
@@ -118,9 +120,6 @@ describe('useBreadcrumbs', () => {
 			expect(
 				(breadcrumbItems[2].querySelector('a') as HTMLElement).getAttribute('href')
 			).toBe('/1/2');
-			expect(
-				(breadcrumbItems[3].querySelector('a') as HTMLElement).getAttribute('href')
-			).toBe('/1/2/3');
 		}
 	});
 
