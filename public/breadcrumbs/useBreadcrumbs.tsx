@@ -87,7 +87,11 @@ const getBreadcrumbMatch = ({
 
 		// Breadcrumbs with a value of null will not have a visible breadcrumb
 		// This is an alternitive way the exclude the route from the breadcrumb array
-		if ((match && breadcrumb === null) || (!match && matchOptions)) {
+		if (
+			(match && breadcrumb === null) ||
+			(match && breadcrumb === false) ||
+			(!match && matchOptions)
+		) {
 			result = NO_BREADCRUMB;
 			return true;
 		}
