@@ -55,7 +55,7 @@ export interface BaseRouteConfig {
 	exact?: boolean;
 	strict?: boolean;
 	redirect?: string;
-	breadcrumb?: ComponentType | ElementType | string | null;
+	breadcrumb?: ComponentType | ElementType | string | null | false;
 	guardOptions?: RouteGuardConfig;
 	navigation?: RouteNavigationConfig;
 	matchOptions?: {

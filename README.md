@@ -313,7 +313,16 @@ const routes = [
 	},
 ];
 ```
-*Option2:* Disable individiual default breadcrumbs by passing an `excludePaths` array in the `options` object
+*Option2:* Disable individiual default breadcrumbs by passing `breadcrumb: false` in the route config.
+```javascript
+const routes = [
+	{
+		path: '/users',
+		breadcrumb: false
+	},
+];
+```
+*Option3:* Disable individiual default breadcrumbs by passing an `excludePaths` array in the `options` object
 ```javascript
 const breadcrumbs = useBreadcrumbs(routes, {
 	excludePaths: ['/users'],

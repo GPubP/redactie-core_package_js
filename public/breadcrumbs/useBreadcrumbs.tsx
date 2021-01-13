@@ -1,22 +1,22 @@
-import React, { useMemo } from 'react';
 import { Breadcrumbs } from '@acpaas-ui/react-components';
-import { useLocation, matchPath, Link } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { Link, matchPath, useLocation } from 'react-router-dom';
 
 import { ModuleRouteConfig } from '../routes/routes.types';
 
 import {
-	Breadcrumb,
-	BreadcrumbOptions,
-	GetBreadcrumbsProps,
-	GetBreadcrumbMatchProps,
-	CustomLinkProps,
-} from './useBreadcrumbs.types';
-import {
 	DEFAULT_MATCH_OPTIONS,
-	NO_BREADCRUMB,
 	DEFAULT_NOT_FOUND_URL,
 	DEFAULT_ROOT_BREADCRUMB_NAME,
+	NO_BREADCRUMB,
 } from './useBreadcrumbs.const';
+import {
+	Breadcrumb,
+	BreadcrumbOptions,
+	CustomLinkProps,
+	GetBreadcrumbMatchProps,
+	GetBreadcrumbsProps,
+} from './useBreadcrumbs.types';
 
 /**
  * This method was "borrowed" from https://stackoverflow.com/a/28339742
@@ -87,7 +87,11 @@ const getBreadcrumbMatch = ({
 
 		// Breadcrumbs with a value of null will not have a visible breadcrumb
 		// This is an alternitive way the exclude the route from the breadcrumb array
-		if ((match && breadcrumb === null) || (!match && matchOptions)) {
+		if (
+			(match && breadcrumb === null) ||
+			(match && breadcrumb === false) ||
+			(!match && matchOptions)
+		) {
 			result = NO_BREADCRUMB;
 			return true;
 		}
@@ -129,6 +133,10 @@ const getBreadcrumbMatch = ({
 const getBreadcrumbs = ({ routes, location, options = {} }: GetBreadcrumbsProps): Breadcrumb[] => {
 	const { pathname } = location;
 	const matches: Breadcrumb[] = [];
+
+	if (!Array.isArray(routes) || routes.length === 0) {
+		return [];
+	}
 
 	// Get pathname from url
 	// https://developer.mozilla.org/en-US/docs/Web/API/URL/pathname
@@ -174,8 +182,8 @@ const useBreadcrumbs = (
 	options?: BreadcrumbOptions
 ): React.ReactNode => {
 	const location = useLocation();
-	const breadcrumbs = useMemo(() => {
-		const breadcrumbs = [
+	const breadcrumbs = useMemo(
+		() => [
 			...(options?.extraBreadcrumbs && Array.isArray(options?.extraBreadcrumbs)
 				? options.extraBreadcrumbs
 				: []),
@@ -184,38 +192,26 @@ const useBreadcrumbs = (
 				location,
 				options,
 			}),
-		];
-		const breadcrumbsLength = breadcrumbs.length;
-
-		return breadcrumbs.map((breadcrumb, index) => {
-			/**
-			 * The latest breadcrumb is not visible for the user since the
-			 * title is used to indicate where the user is.
-			 * We can not remove the breadcrumb from the array
-			 * because the user can still see the `>` sign
-			 * Therefore we need to clear the name and the target properties
-			 */
-			if (breadcrumbsLength === index + 1) {
-				return {
-					...breadcrumb,
-					name: '',
-					target: '',
-				};
-			}
-			return breadcrumb;
-		});
-	}, [routes, options?.extraBreadcrumbs, options?.extraProps, options]);
+			{
+				name: '',
+				target: '',
+			},
+		],
+		[options, routes, location]
+	);
 
 	const CustomLink = ({ href, breadcrumb }: CustomLinkProps): React.ReactElement => {
 		return (
-			<Link to={href}>
-				{typeof breadcrumb.name === 'string'
-					? breadcrumb.name
-					: React.createElement(breadcrumb.name, {
-							...breadcrumb,
-							...options?.extraProps,
-					  })}
-			</Link>
+			<>
+				{typeof breadcrumb.name === 'string' ? (
+					<Link to={href}>{breadcrumb.name}</Link>
+				) : (
+					React.createElement(breadcrumb.name, {
+						...breadcrumb,
+						...options?.extraProps,
+					})
+				)}
+			</>
 		);
 	};
 
