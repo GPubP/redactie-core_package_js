@@ -1,7 +1,7 @@
 import { Config } from '../config';
 import { Loader } from '../loader';
 import { Modules } from '../modules';
-import { PrevNavigation } from '../preNavigation';
+import { PreNavigation } from '../preNavigation';
 import Routes from '../routes/routes.class';
 
 export default {
@@ -9,5 +9,5 @@ export default {
 	routes: new Routes(),
 	config: new Config(),
 	loader: new Loader(),
-	prevNavigation: new PrevNavigation(),
+	preNavigation: new PreNavigation(),
 };
