@@ -9,7 +9,7 @@ export default class PreNavigation {
 		PreNavigationConfig[]
 	> = this._preNavigationItemsSubject.asObservable();
 
-	public get prevNavs(): PreNavigationConfig[] {
+	public get preNavigationItems(): PreNavigationConfig[] {
 		return this._preNavigationItems;
 	}
 
