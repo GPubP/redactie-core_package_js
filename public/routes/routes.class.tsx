@@ -113,13 +113,24 @@ export default class Routes {
 								strict={route.strict}
 								{...route.guardOptions}
 								render={(props: RouteComponentProps): JSX.Element =>
-									route.redirect && props.match.isExact ? (
+									(console.log(
+										console.log({
+											pathname: generatePath(route.redirect!, {
+												...props.match.params,
+											}),
+											search: props.location.search,
+										})
+									) as any) ||
+									(route.redirect && props.match.isExact) ? (
 										<>
 											<Redirect
 												from={route.path}
-												to={generatePath(route.redirect, {
-													...props.match.params,
-												})}
+												to={{
+													pathname: generatePath(route.redirect!, {
+														...props.match.params,
+													}),
+													search: props.location.search,
+												}}
 											/>
 											<route.component
 												{...props}
