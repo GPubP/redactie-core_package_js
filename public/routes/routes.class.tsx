@@ -114,11 +114,12 @@ export default class Routes {
 								{...route.guardOptions}
 								render={(props: RouteComponentProps): JSX.Element =>
 									(route.redirect &&
-										(console.log(props.match, {
+										(console.log(props.match, props.location, {
 											pathname: generatePath(route.redirect, {
 												...props.match.params,
 											}),
 											search: props.location.search,
+											state: props.location.state,
 										}) as any)) ||
 									(route.redirect && props.match.isExact) ? (
 										<>
@@ -129,6 +130,7 @@ export default class Routes {
 														...props.match.params,
 													}),
 													search: props.location.search,
+													state: props.location.state,
 												}}
 											/>
 											<route.component
