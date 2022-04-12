@@ -117,9 +117,13 @@ export default class Routes {
 										<>
 											<Redirect
 												from={route.path}
-												to={generatePath(route.redirect, {
-													...props.match.params,
-												})}
+												to={{
+													pathname: generatePath(route.redirect, {
+														...props.match.params,
+													}),
+													search: props.location.search,
+													state: props.location.state,
+												}}
 											/>
 											<route.component
 												{...props}
