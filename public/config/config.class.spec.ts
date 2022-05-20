@@ -31,7 +31,7 @@ describe('[UNIT - Config]', () => {
 				expect(value).toEqual({
 					tenantId: 'test-id',
 				}),
-					resolve();
+					resolve(null);
 			})
 		);
 	});

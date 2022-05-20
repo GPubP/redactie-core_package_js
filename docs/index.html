@@ -1,0 +1,266 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@redactie/redactie-core</title><meta name="description" content="Documentation for @redactie/redactie-core"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@redactie/redactie-core</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@redactie/redactie-core </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#redactie-core" id="redactie-core" style="color: inherit; text-decoration: none;">
+  <h1>Redactie Core</h1>
+</a>
+<blockquote>
+<p>Use this package in your custom <code>Redactie module</code> to hook into the main application.</p>
+</blockquote>
+
+<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
+  <h2>Table of Contents</h2>
+</a>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#features">Features</a></li>
+</ul>
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<ul>
+<li>Clone this repo to your local machine</li>
+</ul>
+<blockquote>
+<p>Now install all dependencies using npm</p>
+</blockquote>
+<pre><code class="language-shell"><span class="hl-0">$ npm install</span><br/>
+</code></pre>
+<blockquote>
+<p>Run tests to see if everything is working correctly</p>
+</blockquote>
+<pre><code class="language-shell"><span class="hl-0">$ npm run </span><span class="hl-1">test</span>
+</code></pre>
+
+<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+  <h2>Usage</h2>
+</a>
+<blockquote>
+<p>Install the package using npm</p>
+</blockquote>
+<pre><code class="language-shell"><span class="hl-0">$ npm install @redactie/redactie-core</span>
+</code></pre>
+<pre><code class="language-javascript"><span class="hl-2">import</span><span class="hl-0"> </span><span class="hl-3">Core</span><span class="hl-0"> </span><span class="hl-2">from</span><span class="hl-0"> </span><span class="hl-4">&#39;@redactie/redactie-core&#39;</span><br/>
+</code></pre>
+
+<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+  <h2>Features</h2>
+</a>
+
+<a href="#modules" id="modules" style="color: inherit; text-decoration: none;">
+  <h3>Modules</h3>
+</a>
+<blockquote>
+<p>Use the Modules API to expose your own API or to talk to an API from a dependency.</p>
+</blockquote>
+<pre><code class="language-javascript"><span class="hl-5">// Expose an API to all consumers</span><br/><span class="hl-3">Core</span><span class="hl-0">.</span><span class="hl-3">modules</span><span class="hl-0">.</span><span class="hl-1">exposeModuleApi</span><span class="hl-0">(</span><span class="hl-4">&#39;name-of-dependency&#39;</span><span class="hl-0">, {</span><br/><span class="hl-0">    </span><span class="hl-1">doSomething</span><span class="hl-3">:</span><span class="hl-0"> () </span><span class="hl-6">=&gt;</span><span class="hl-0"> </span><span class="hl-4">&#39;Do something&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">});</span><br/><br/><span class="hl-5">// Get and use the API from a dependency</span><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">depModuleAPI</span><span class="hl-0"> = </span><span class="hl-3">Core</span><span class="hl-0">.</span><span class="hl-3">modules</span><span class="hl-0">.</span><span class="hl-1">getModuleAPI</span><span class="hl-0">(</span><span class="hl-4">&#39;name-of-dependency&#39;</span><span class="hl-0">);</span><br/><span class="hl-2">if</span><span class="hl-0"> (</span><span class="hl-3">depModuleAPI</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-3">depModuleAPI</span><span class="hl-0">.</span><span class="hl-1">doSomething</span><span class="hl-0">();</span><br/><span class="hl-0">}</span>
+</code></pre>
+
+<a href="#routes" id="routes" style="color: inherit; text-decoration: none;">
+  <h3>Routes</h3>
+</a>
+<blockquote>
+<p>Use the Routes API to manage the routes, site navigation and breadcrumbs</p>
+</blockquote>
+
+<a href="#register-a-route" id="register-a-route" style="color: inherit; text-decoration: none;">
+  <h4>Register a route</h4>
+</a>
+<p>You can register a route to hook into the main routing system of the <code>Redactie</code>
+application. It will also add a navigation item to the main navigation when a <code>label</code> prop is provided.</p>
+<pre><code class="language-javascript"><span class="hl-3">Core</span><span class="hl-0">.</span><span class="hl-3">routes</span><span class="hl-0">.</span><span class="hl-1">register</span><span class="hl-0">({</span><br/><span class="hl-0">    </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/users&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-3">component:</span><span class="hl-0"> </span><span class="hl-3">Dashboard</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-3">label:</span><span class="hl-0"> </span><span class="hl-4">&#39;Users&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-3">routes:</span><span class="hl-0"> [</span><br/><span class="hl-0">        {</span><br/><span class="hl-0">            </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/users/:userId&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">            </span><span class="hl-3">component:</span><span class="hl-0"> </span><span class="hl-3">UserComponent</span><span class="hl-0">,</span><br/><span class="hl-0">        },</span><br/><span class="hl-0">    ],</span><br/><span class="hl-0">});</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-1">UsersComponent</span><span class="hl-0">: </span><span class="hl-8">FC</span><span class="hl-0">&lt;{ </span><span class="hl-3">route</span><span class="hl-0">: </span><span class="hl-8">ModuleRouteConfig</span><span class="hl-0"> }&gt; = ({ </span><span class="hl-3">route</span><span class="hl-0"> }) </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-2">return</span><span class="hl-0"> (</span><br/><span class="hl-0">        </span><span class="hl-9">&lt;&gt;</span><br/><span class="hl-0">            // Render child routes =&gt; /users/:userId</span><br/><span class="hl-0">            </span><span class="hl-6">{</span><span class="hl-3">Core</span><span class="hl-10">.</span><span class="hl-3">routes</span><span class="hl-10">.</span><span class="hl-1">render</span><span class="hl-10">(</span><span class="hl-3">route</span><span class="hl-10">.</span><span class="hl-3">routes</span><span class="hl-10">)</span><span class="hl-6">}</span><br/><span class="hl-0">        </span><span class="hl-9">&lt;/&gt;</span><br/><span class="hl-0">    );</span><br/><span class="hl-0">};</span><br/>
+</code></pre>
+
+<a href="#update-route" id="update-route" style="color: inherit; text-decoration: none;">
+  <h4>Update route</h4>
+</a>
+<pre><code class="language-javascript"><span class="hl-3">Core</span><span class="hl-0">.</span><span class="hl-3">routes</span><span class="hl-0">.</span><span class="hl-1">update</span><span class="hl-0">({</span><br/><span class="hl-0">    </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/users&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-3">component:</span><span class="hl-0"> </span><span class="hl-3">UsersComponent</span><span class="hl-0">,</span><br/><span class="hl-0">});</span>
+</code></pre>
+
+<a href="#update-child-routes" id="update-child-routes" style="color: inherit; text-decoration: none;">
+  <h4>Update child routes</h4>
+</a>
+<pre><code class="language-javascript"><span class="hl-3">Core</span><span class="hl-0">.</span><span class="hl-3">routes</span><span class="hl-0">.</span><span class="hl-1">updateChildRoutes</span><span class="hl-0">(</span><span class="hl-4">&#39;/users&#39;</span><span class="hl-0">, [{</span><br/><span class="hl-0">    </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/users/:userId&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">    </span><span class="hl-3">component:</span><span class="hl-0"> </span><span class="hl-3">UserComponent</span><span class="hl-0">,</span><br/><span class="hl-0">}]);</span>
+</code></pre>
+
+<a href="#listen-for-route-changes" id="listen-for-route-changes" style="color: inherit; text-decoration: none;">
+  <h4>Listen for route changes</h4>
+</a>
+<pre><code class="language-javascript"><span class="hl-3">Core</span><span class="hl-0">.</span><span class="hl-3">routes</span><span class="hl-0">.</span><span class="hl-3">routesChanges</span><span class="hl-0">.</span><span class="hl-1">subscribe</span><span class="hl-0">(</span><span class="hl-3">routes</span><span class="hl-0"> </span><span class="hl-6">=&gt;</span><span class="hl-0"> ...);</span>
+</code></pre>
+
+<a href="#detailed-description-of-the-properties" id="detailed-description-of-the-properties" style="color: inherit; text-decoration: none;">
+  <h4>Detailed description of the properties</h4>
+</a>
+<table>
+<thead>
+<tr>
+<th align="right">Props</th>
+<th align="right">Datatype</th>
+<th align="right">Required</th>
+<th align="right">Default</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">path</td>
+<td align="right">String</td>
+<td align="right">yes</td>
+<td align="right">/</td>
+<td align="right">Route path</td>
+</tr>
+<tr>
+<td align="right">component</td>
+<td align="right">React.Node</td>
+<td align="right">yes</td>
+<td align="right">/</td>
+<td align="right">React component</td>
+</tr>
+<tr>
+<td align="right">exact</td>
+<td align="right">Boolean</td>
+<td align="right">no</td>
+<td align="right">false</td>
+<td align="right">Exact route match</td>
+</tr>
+<tr>
+<td align="right">strict</td>
+<td align="right">Boolean</td>
+<td align="right">no</td>
+<td align="right">false</td>
+<td align="right">Strict route match</td>
+</tr>
+<tr>
+<td align="right">label</td>
+<td align="right">String</td>
+<td align="right">no</td>
+<td align="right">/</td>
+<td align="right">Used as navigation item</td>
+</tr>
+<tr>
+<td align="right">isDefaultRoute</td>
+<td align="right">Boolean</td>
+<td align="right">no</td>
+<td align="right">false</td>
+<td align="right">Default route when true</td>
+</tr>
+<tr>
+<td align="right">routes</td>
+<td align="right">Array</td>
+<td align="right">no</td>
+<td align="right">/</td>
+<td align="right">Child routes</td>
+</tr>
+<tr>
+<td align="right">breadcrumb</td>
+<td align="right">Function,String</td>
+<td align="right">no</td>
+<td align="right">defaults to path segment</td>
+<td align="right">Breadcrumb name</td>
+</tr>
+<tr>
+<td align="right">matchOptions</td>
+<td align="right">Object</td>
+<td align="right">no</td>
+<td align="right">{ exact: true, strict: false }</td>
+<td align="right">Route matchOptions</td>
+</tr>
+<tr>
+<td align="right">guardOptions</td>
+<td align="right">Object</td>
+<td align="right">no</td>
+<td align="right">/</td>
+<td align="right">Guard options</td>
+</tr>
+</tbody></table>
+
+<a href="#guards" id="guards" style="color: inherit; text-decoration: none;">
+  <h3>Guards</h3>
+</a>
+<blockquote>
+<p>Use guards to prevent the user from accessing routes</p>
+</blockquote>
+<p>We are using the <a href="https://github.com/Upstatement/react-router-guards">react router guards</a> package</p>
+<pre><code class="language-javascript"><span class="hl-6">interface</span><span class="hl-0"> </span><span class="hl-8">GuardOptions</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-3">guards</span><span class="hl-0">?: </span><span class="hl-8">GuardFunction</span><span class="hl-0">[];</span><br/><span class="hl-0">  </span><span class="hl-3">ignoreGlobal</span><span class="hl-0">?: </span><span class="hl-8">boolean</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-3">loading</span><span class="hl-0">?: </span><span class="hl-8">PageComponent</span><span class="hl-0">;</span><br/><span class="hl-0">  </span><span class="hl-3">error</span><span class="hl-0">?: </span><span class="hl-8">PageComponent</span><span class="hl-0">;</span><br/><span class="hl-0">}</span>
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th align="center">Optional</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>guards</code></td>
+<td align="center">✅</td>
+<td>the guards to set for this route</td>
+<td>It&#39;s important to note that guards set by the <code>GuardedRoute</code> will be added to the <em>end</em> of the middleware queue set by its parent <a href="https://github.com/Upstatement/react-router-guards/blob/master/docs/guard-provider.md"><code>GuardedProvider</code></a>.</td>
+</tr>
+<tr>
+<td><code>ignoreGlobal</code></td>
+<td align="center">✅</td>
+<td>whether to ignore guards set by parent <code>GuardedProvider</code>s</td>
+<td></td>
+</tr>
+<tr>
+<td><code>loading</code></td>
+<td align="center">✅</td>
+<td>the <a href="https://github.com/Upstatement/react-router-guards/blob/master/docs/page-components.md">loading page</a> for this route</td>
+<td>Overrides the global loading page, if value provided.</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td align="center">✅</td>
+<td>the <a href="https://github.com/Upstatement/react-router-guards/blob/master/docs/page-components.md">error page</a> for this route</td>
+<td>Overrides the global error page, if value provided.</td>
+</tr>
+</tbody></table>
+<pre><code class="language-javascript"><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-1">requireLogin</span><span class="hl-0"> = (</span><span class="hl-3">to</span><span class="hl-0">, </span><span class="hl-3">from</span><span class="hl-0">, </span><span class="hl-3">next</span><span class="hl-0">) </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">  </span><span class="hl-2">if</span><span class="hl-0"> (</span><span class="hl-3">to</span><span class="hl-0">.</span><span class="hl-3">meta</span><span class="hl-0">.</span><span class="hl-3">auth</span><span class="hl-0">) {</span><br/><span class="hl-0">    </span><span class="hl-2">if</span><span class="hl-0"> (</span><span class="hl-1">getIsLoggedIn</span><span class="hl-0">()) {</span><br/><span class="hl-0">      </span><span class="hl-1">next</span><span class="hl-0">();</span><br/><span class="hl-0">    }</span><br/><span class="hl-0">    </span><span class="hl-3">next</span><span class="hl-0">.</span><span class="hl-1">redirect</span><span class="hl-0">(</span><span class="hl-4">&#39;/login&#39;</span><span class="hl-0">);</span><br/><span class="hl-0">  } </span><span class="hl-2">else</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-1">next</span><span class="hl-0">();</span><br/><span class="hl-0">  }</span><br/><span class="hl-0">};</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-1">UsersComponent</span><span class="hl-0"> = () </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">routes</span><span class="hl-0"> = [{</span><br/><span class="hl-0">        </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/users&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-3">component:</span><span class="hl-0"> </span><span class="hl-3">Dashboard</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-3">label:</span><span class="hl-0"> </span><span class="hl-4">&#39;Users&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-5">// Guards on route level</span><br/><span class="hl-0">        </span><span class="hl-3">guardOptions:</span><span class="hl-0"> {</span><br/><span class="hl-0">            </span><span class="hl-3">guards:</span><span class="hl-0"> [],</span><br/><span class="hl-0">        }</span><br/><span class="hl-0">    }];</span><br/><span class="hl-0">    </span><span class="hl-2">return</span><span class="hl-0"> (</span><br/><span class="hl-0">        </span><span class="hl-9">&lt;&gt;</span><br/><span class="hl-0">            </span><span class="hl-6">{</span><span class="hl-3">Core</span><span class="hl-10">.</span><span class="hl-3">routes</span><span class="hl-10">.</span><span class="hl-1">render</span><span class="hl-10">(</span><span class="hl-3">routes</span><span class="hl-10">, {}, {}, {</span><br/><span class="hl-10">                </span><span class="hl-5">// GuardProvider options</span><br/><span class="hl-10">                </span><span class="hl-3">loading:</span><span class="hl-10"> </span><span class="hl-3">LoadingPage</span><span class="hl-10">,</span><br/><span class="hl-10">                </span><span class="hl-3">error:</span><span class="hl-10"> </span><span class="hl-3">ErrorPage</span><span class="hl-10">,</span><br/><span class="hl-10">                </span><span class="hl-3">guards:</span><span class="hl-10"> [</span><span class="hl-3">requireLogin</span><span class="hl-10">]</span><br/><span class="hl-10">            })</span><span class="hl-6">}</span><br/><span class="hl-0">        </span><span class="hl-9">&lt;/&gt;</span><br/><span class="hl-0">    );</span><br/><span class="hl-0">};</span><br/>
+</code></pre>
+
+<a href="#breadcrumbs" id="breadcrumbs" style="color: inherit; text-decoration: none;">
+  <h3>Breadcrumbs</h3>
+</a>
+<blockquote>
+<p>Use Breadcrumbs API to generate a nice Breadcrumb component</p>
+</blockquote>
+
+<a href="#default-breadcrumbs" id="default-breadcrumbs" style="color: inherit; text-decoration: none;">
+  <h4>Default breadcrumbs</h4>
+</a>
+<pre><code class="language-javascript"><span class="hl-2">import</span><span class="hl-0"> { </span><span class="hl-3">useBreadcrumbs</span><span class="hl-0"> } </span><span class="hl-2">from</span><span class="hl-0"> </span><span class="hl-4">&#39;@redactie/redactie-core&#39;</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-1">BreadcrumbsComponent</span><span class="hl-0"> = () </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">routes</span><span class="hl-0"> = [</span><br/><span class="hl-0">        {</span><br/><span class="hl-0">            </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/dashboard&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">            </span><span class="hl-3">routes:</span><span class="hl-0"> [</span><br/><span class="hl-0">                {</span><br/><span class="hl-0">                    </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/dashboard/one&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                },</span><br/><span class="hl-0">            ],</span><br/><span class="hl-0">        },</span><br/><span class="hl-0">    ];</span><br/><span class="hl-0">    </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">breadcrumbs</span><span class="hl-0"> = </span><span class="hl-1">useBreadcrumbs</span><span class="hl-0">(</span><span class="hl-3">routes</span><span class="hl-0">);</span><br/><br/><span class="hl-0">    </span><span class="hl-2">return</span><span class="hl-0"> {</span><br/><span class="hl-0">        &lt;&gt;</span><br/><span class="hl-0">            {</span><span class="hl-3">breadcrumbs</span><span class="hl-0">}</span><br/><span class="hl-0">        &lt;/&gt;</span><br/><span class="hl-0">    };</span><br/><span class="hl-0">}</span><br/><br/><span class="hl-5">// Result</span><br/><span class="hl-5">// Dashboard &gt; one</span><br/>
+</code></pre>
+
+<a href="#custom-breadcrumbs" id="custom-breadcrumbs" style="color: inherit; text-decoration: none;">
+  <h4>Custom breadcrumbs</h4>
+</a>
+<p>If you don&#39;t want to use the default breadcrumb that we created, you can pass a <code>string</code> or a <code>component</code> to the <code>breadcrumb</code> prop
+to create your own custom breadcrumb.</p>
+<pre><code class="language-javascript"><span class="hl-2">import</span><span class="hl-0"> { </span><span class="hl-3">useBreadcrumbs</span><span class="hl-0"> } </span><span class="hl-2">from</span><span class="hl-0"> </span><span class="hl-4">&#39;@redactie/redactie-core&#39;</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-1">BreadcrumbsComponent</span><span class="hl-0"> = () </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">users</span><span class="hl-0"> = {</span><br/><span class="hl-0">        </span><span class="hl-4">&#39;123&#39;</span><span class="hl-3">:</span><span class="hl-0"> {</span><br/><span class="hl-0">            </span><span class="hl-3">name:</span><span class="hl-0"> </span><span class="hl-4">&#39;John Doe&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        },</span><br/><span class="hl-0">    };</span><br/><span class="hl-0">    </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">routes</span><span class="hl-0"> = [</span><br/><span class="hl-0">        {</span><br/><span class="hl-0">            </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">            </span><span class="hl-3">breadcrumb:</span><span class="hl-0"> </span><span class="hl-4">&#39;Home&#39;</span><br/><span class="hl-0">            </span><span class="hl-3">routes</span><span class="hl-0">: [</span><br/><span class="hl-0">                {</span><br/><span class="hl-0">                    </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/users&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                    </span><span class="hl-3">routes:</span><span class="hl-0"> [</span><br/><span class="hl-0">                        {</span><br/><span class="hl-0">                            </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/users/:userId&#39;</span><br/><span class="hl-0">                            </span><span class="hl-1">breadcrumb</span><span class="hl-0">(</span><span class="hl-3">props</span><span class="hl-0">: </span><span class="hl-3">BreadcrumbComponentProps</span><span class="hl-0">) {</span><br/><span class="hl-0">                                return &lt;&gt;{users</span><span class="hl-3">[props.match.params?.userId].name}&lt;/&gt;</span><br/><span class="hl-3">                            },</span><br/><span class="hl-3">                        }</span><br/><span class="hl-3">                    ]</span><br/><span class="hl-3">                },</span><br/><span class="hl-3">            ],</span><br/><span class="hl-3">        },</span><br/><span class="hl-3">    ];</span><br/><span class="hl-3">    const breadcrumbs = useBreadcrumbs(routes);</span><br/><br/><span class="hl-3">    return {</span><br/><span class="hl-3">        &lt;&gt;</span><br/><span class="hl-3">            {breadcrumbs}</span><br/><span class="hl-3">        &lt;/&gt;</span><br/><span class="hl-3">    };</span><br/><span class="hl-3">}</span><br/><br/><span class="hl-5">// Result</span><br/><span class="hl-5">// Home &gt; Users &gt; John Doe</span><br/>
+</code></pre>
+
+<a href="#use-your-own-breadcrumbs-or-combine-them-with-the-ones-that-are-genarated-based-on-the-current-location" id="use-your-own-breadcrumbs-or-combine-them-with-the-ones-that-are-genarated-based-on-the-current-location" style="color: inherit; text-decoration: none;">
+  <h4>Use your own breadcrumbs or combine them with the ones that are genarated based on the current location</h4>
+</a>
+<p>This can be useful when you don&#39;t to show breadcrumbs based on the current location or if you want to add some
+custom breadcrumbs before rendering the generated ones.</p>
+<pre><code class="language-javascript"><span class="hl-2">import</span><span class="hl-0"> { </span><span class="hl-3">useBreadcrumbs</span><span class="hl-0"> } </span><span class="hl-2">from</span><span class="hl-0"> </span><span class="hl-4">&#39;@redactie/redactie-core&#39;</span><br/><br/><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-1">BreadcrumbsComponent</span><span class="hl-0"> = () </span><span class="hl-6">=&gt;</span><span class="hl-0"> {</span><br/><span class="hl-0">    </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">routes</span><span class="hl-0"> = [</span><br/><span class="hl-0">        {</span><br/><span class="hl-0">            </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">            </span><span class="hl-3">breadcrumb:</span><span class="hl-0"> </span><span class="hl-4">&#39;Home&#39;</span><br/><span class="hl-0">        },</span><br/><span class="hl-0">    ];</span><br/><span class="hl-0">    </span><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">breadcrumbs</span><span class="hl-0"> = </span><span class="hl-1">useBreadcrumbs</span><span class="hl-0">(</span><span class="hl-3">routes</span><span class="hl-0">, {</span><br/><span class="hl-0">        </span><span class="hl-3">extraBreadcrumbs:</span><span class="hl-0"> [</span><br/><span class="hl-0">            {</span><br/><span class="hl-0">                </span><span class="hl-3">name:</span><span class="hl-0"> </span><span class="hl-4">&#39;Extra breadcrumb&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">                </span><span class="hl-3">target:</span><span class="hl-0"> </span><span class="hl-4">&#39;/some/path&#39;</span><br/><span class="hl-0">            }</span><br/><span class="hl-0">        ]</span><br/><span class="hl-0">    });</span><br/><br/><span class="hl-0">    </span><span class="hl-2">return</span><span class="hl-0"> {</span><br/><span class="hl-0">        &lt;&gt;</span><br/><span class="hl-0">            {</span><span class="hl-3">breadcrumbs</span><span class="hl-0">}</span><br/><span class="hl-0">        &lt;/&gt;</span><br/><span class="hl-0">    };</span><br/><span class="hl-0">}</span><br/><br/><span class="hl-5">// Result</span><br/><span class="hl-5">// Extra breadcrumb &gt; Home</span>
+</code></pre>
+
+<a href="#disable-default-generated-breadcrumbs" id="disable-default-generated-breadcrumbs" style="color: inherit; text-decoration: none;">
+  <h4>Disable default generated breadcrumbs</h4>
+</a>
+<p>This package will attempt to create breadcrumbs for you based on the route section/segment. For example <code>/users</code> will automatically
+create the breadcrumb <code>Users</code>. there are two ways to disable default breadcrumbs for a path.</p>
+<p><em>Option1:</em> Disable individiual default breadcrumbs by passing <code>breadcrumb: null</code> in the route config.</p>
+<pre><code class="language-javascript"><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">routes</span><span class="hl-0"> = [</span><br/><span class="hl-0">    {</span><br/><span class="hl-0">        </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/users&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-3">breadcrumb:</span><span class="hl-0"> </span><span class="hl-6">null</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">];</span>
+</code></pre>
+<p><em>Option2:</em> Disable individiual default breadcrumbs by passing <code>breadcrumb: false</code> in the route config.</p>
+<pre><code class="language-javascript"><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">routes</span><span class="hl-0"> = [</span><br/><span class="hl-0">    {</span><br/><span class="hl-0">        </span><span class="hl-3">path:</span><span class="hl-0"> </span><span class="hl-4">&#39;/users&#39;</span><span class="hl-0">,</span><br/><span class="hl-0">        </span><span class="hl-3">breadcrumb:</span><span class="hl-0"> </span><span class="hl-6">false</span><br/><span class="hl-0">    },</span><br/><span class="hl-0">];</span>
+</code></pre>
+<p><em>Option3:</em> Disable individiual default breadcrumbs by passing an <code>excludePaths</code> array in the <code>options</code> object</p>
+<pre><code class="language-javascript"><span class="hl-6">const</span><span class="hl-0"> </span><span class="hl-7">breadcrumbs</span><span class="hl-0"> = </span><span class="hl-1">useBreadcrumbs</span><span class="hl-0">(</span><span class="hl-3">routes</span><span class="hl-0">, {</span><br/><span class="hl-0">    </span><span class="hl-3">excludePaths:</span><span class="hl-0"> [</span><span class="hl-4">&#39;/users&#39;</span><span class="hl-0">],</span><br/><span class="hl-0">});</span>
+</code></pre>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-interface"><a href="interfaces/BaseRouteConfig.html" class="tsd-kind-icon">Base<wbr/>Route<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/Breadcrumb.html" class="tsd-kind-icon">Breadcrumb</a></li><li class="tsd-kind-interface"><a href="interfaces/BreadcrumbOptions.html" class="tsd-kind-icon">Breadcrumb<wbr/>Options</a></li><li class="tsd-kind-interface"><a href="interfaces/ChildModuleRouteConfig.html" class="tsd-kind-icon">Child<wbr/>Module<wbr/>Route<wbr/>Config</a></li><li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/ChildRouteConfigComponentProps.html" class="tsd-kind-icon">Child<wbr/>Route<wbr/>Config<wbr/>Component<wbr/>Props</a></li><li class="tsd-kind-interface"><a href="interfaces/CustomLinkProps.html" class="tsd-kind-icon">Custom<wbr/>Link<wbr/>Props</a></li><li class="tsd-kind-interface"><a href="interfaces/GetBreadcrumbMatchProps.html" class="tsd-kind-icon">Get<wbr/>Breadcrumb<wbr/>Match<wbr/>Props</a></li><li class="tsd-kind-interface"><a href="interfaces/GetBreadcrumbsProps.html" class="tsd-kind-icon">Get<wbr/>Breadcrumbs<wbr/>Props</a></li><li class="tsd-kind-interface"><a href="interfaces/LoaderItem.html" class="tsd-kind-icon">Loader<wbr/>Item</a></li><li class="tsd-kind-interface"><a href="interfaces/Location.html" class="tsd-kind-icon">Location</a></li><li class="tsd-kind-interface"><a href="interfaces/Match.html" class="tsd-kind-icon">Match</a></li><li class="tsd-kind-interface"><a href="interfaces/ModuleAPI.html" class="tsd-kind-icon">ModuleAPI</a></li><li class="tsd-kind-interface"><a href="interfaces/ModuleAPIMap.html" class="tsd-kind-icon">ModuleAPIMap</a></li><li class="tsd-kind-interface"><a href="interfaces/ModuleRouteConfig.html" class="tsd-kind-icon">Module<wbr/>Route<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/PreNavigationConfig.html" class="tsd-kind-icon">Pre<wbr/>Navigation<wbr/>Config</a></li><li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/RouteConfigComponentProps.html" class="tsd-kind-icon">Route<wbr/>Config<wbr/>Component<wbr/>Props</a></li><li class="tsd-kind-interface"><a href="interfaces/RouteGuardConfig.html" class="tsd-kind-icon">Route<wbr/>Guard<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/RouteNavigationConfig.html" class="tsd-kind-icon">Route<wbr/>Navigation<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/RouteOptions.html" class="tsd-kind-icon">Route<wbr/>Options</a></li><li class="tsd-kind-interface"><a href="interfaces/Routes.html" class="tsd-kind-icon">Routes</a></li><li class="tsd-kind-type-alias"><a href="modules.html#BreadcrumbComponentProps" class="tsd-kind-icon">Breadcrumb<wbr/>Component<wbr/>Props</a></li><li class="tsd-kind-type-alias"><a href="modules.html#CanShownFunction" class="tsd-kind-icon">Can<wbr/>Shown<wbr/>Function</a></li><li class="tsd-kind-type-alias tsd-is-external"><a href="modules.html#GuardFunction" class="tsd-kind-icon">Guard<wbr/>Function</a></li><li class="tsd-kind-type-alias"><a href="modules.html#Next" class="tsd-kind-icon">Next</a></li><li class="tsd-kind-type-alias tsd-is-external"><a href="modules.html#PageComponent" class="tsd-kind-icon">Page<wbr/>Component</a></li><li class="tsd-kind-variable"><a href="modules.html#default" class="tsd-kind-icon">default</a></li><li class="tsd-kind-function"><a href="modules.html#useBreadcrumbs" class="tsd-kind-icon">use<wbr/>Breadcrumbs</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
